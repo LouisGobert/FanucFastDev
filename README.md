@@ -13,4 +13,4 @@ Application console pour Linux qui permet de dévellopé des applications .LS pu
 #### Information générale
 Version **1.0**
 
-Project créé par Louis Govert.
+Project créé par Louis Gobert.
