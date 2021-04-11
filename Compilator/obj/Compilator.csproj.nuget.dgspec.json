@@ -1,0 +1,130 @@
+{
+  "format": 1,
+  "restore": {
+    "/home/louis/Documents/dev/c#/FanucFastDev/Compilator/Compilator.csproj": {}
+  },
+  "projects": {
+    "/home/louis/Documents/dev/c#/FanucFastDev/Compilator/Compilator.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/louis/Documents/dev/c#/FanucFastDev/Compilator/Compilator.csproj",
+        "projectName": "Compilator",
+        "projectPath": "/home/louis/Documents/dev/c#/FanucFastDev/Compilator/Compilator.csproj",
+        "packagesPath": "/home/louis/.nuget/packages/",
+        "outputPath": "/home/louis/Documents/dev/c#/FanucFastDev/Compilator/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/louis/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net5.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net5.0": {
+            "targetAlias": "net5.0",
+            "projectReferences": {
+              "/home/louis/Documents/dev/c#/FanucFastDev/RobotLibrary/RobotLibrary.csproj": {
+                "projectPath": "/home/louis/Documents/dev/c#/FanucFastDev/RobotLibrary/RobotLibrary.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net5.0": {
+          "targetAlias": "net5.0",
+          "dependencies": {
+            "Microsoft.CodeAnalysis.CSharp": {
+              "target": "Package",
+              "version": "[3.10.0-1.final, )"
+            },
+            "System.CodeDom": {
+              "target": "Package",
+              "version": "[5.0.0, )"
+            },
+            "System.Runtime.Loader": {
+              "target": "Package",
+              "version": "[4.3.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/5.0.103/RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/home/louis/Documents/dev/c#/FanucFastDev/RobotLibrary/RobotLibrary.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/louis/Documents/dev/c#/FanucFastDev/RobotLibrary/RobotLibrary.csproj",
+        "projectName": "RobotLibrary",
+        "projectPath": "/home/louis/Documents/dev/c#/FanucFastDev/RobotLibrary/RobotLibrary.csproj",
+        "packagesPath": "/home/louis/.nuget/packages/",
+        "outputPath": "/home/louis/Documents/dev/c#/FanucFastDev/RobotLibrary/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/louis/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net5.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net5.0": {
+            "targetAlias": "net5.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net5.0": {
+          "targetAlias": "net5.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/5.0.103/RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
