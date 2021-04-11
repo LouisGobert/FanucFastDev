@@ -40,13 +40,10 @@ namespace Compilator.Interpreter
 
 
             // Formattage du fichier de base .cs
-            
+            // COMIT
             for (iFL = 0; iFL < fileLine.Length; iFL++)
             {
                 s = fileLine[iFL];
-
-
-
 
                 // Mise a jour de Main et obtention de la liste des programmes
                 if (s.Contains("MainSolution()"))
