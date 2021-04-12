@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RobotLibrary.Utils
 {
-    public class Utils
+    public class StringUtils
     {
         private static char[] accent = { 'é', 'è', 'ê', 'â', 'û', 'î' };
 

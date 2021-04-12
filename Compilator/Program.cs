@@ -14,15 +14,12 @@ namespace Compilator
 
             List<string> arguments = new List<string>(args);
 
-            if (arguments.Count < 2) {
+            if (arguments.Count == 0) {
                 Console.WriteLine("Argument manquant.");
                 usagePrint();
 
                 return -1;
             } else if (arguments.Count == 2) {
-
-                //string path_src;
-                //string path_dest = string.Empty;
 
                 // Si programme par défault
                 if (arguments.Contains("-c") || arguments.Contains("--cs")) {

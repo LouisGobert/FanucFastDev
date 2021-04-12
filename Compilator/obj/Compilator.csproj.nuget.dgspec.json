@@ -1,39 +1,33 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Louis\\Desktop\\dev\\git\\Compilator\\Compilator.csproj": {}
+    "/home/louis/Documents/dev/c#/FanucFastDev/Compilator/Compilator.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Louis\\Desktop\\dev\\git\\Compilator\\Compilator.csproj": {
+    "/home/louis/Documents/dev/c#/FanucFastDev/Compilator/Compilator.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Louis\\Desktop\\dev\\git\\Compilator\\Compilator.csproj",
+        "projectUniqueName": "/home/louis/Documents/dev/c#/FanucFastDev/Compilator/Compilator.csproj",
         "projectName": "Compilator",
-        "projectPath": "C:\\Users\\Louis\\Desktop\\dev\\git\\Compilator\\Compilator.csproj",
-        "packagesPath": "C:\\Users\\Louis\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Louis\\Desktop\\dev\\git\\Compilator\\obj\\",
+        "projectPath": "/home/louis/Documents/dev/c#/FanucFastDev/Compilator/Compilator.csproj",
+        "packagesPath": "/home/louis/.nuget/packages/",
+        "outputPath": "/home/louis/Documents/dev/c#/FanucFastDev/Compilator/obj/",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Louis\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "/home/louis/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net5.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "C:\\Users\\Louis\\Desktop\\dev\\git\\RobotLibrary\\RobotLibrary.csproj": {
-                "projectPath": "C:\\Users\\Louis\\Desktop\\dev\\git\\RobotLibrary\\RobotLibrary.csproj"
+              "/home/louis/Documents/dev/c#/FanucFastDev/RobotLibrary/RobotLibrary.csproj": {
+                "projectPath": "/home/louis/Documents/dev/c#/FanucFastDev/RobotLibrary/RobotLibrary.csproj"
               }
             }
           }
@@ -76,32 +70,26 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/5.0.103/RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\Louis\\Desktop\\dev\\git\\RobotLibrary\\RobotLibrary.csproj": {
+    "/home/louis/Documents/dev/c#/FanucFastDev/RobotLibrary/RobotLibrary.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Louis\\Desktop\\dev\\git\\RobotLibrary\\RobotLibrary.csproj",
+        "projectUniqueName": "/home/louis/Documents/dev/c#/FanucFastDev/RobotLibrary/RobotLibrary.csproj",
         "projectName": "RobotLibrary",
-        "projectPath": "C:\\Users\\Louis\\Desktop\\dev\\git\\RobotLibrary\\RobotLibrary.csproj",
-        "packagesPath": "C:\\Users\\Louis\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Louis\\Desktop\\dev\\git\\RobotLibrary\\obj\\",
+        "projectPath": "/home/louis/Documents/dev/c#/FanucFastDev/RobotLibrary/RobotLibrary.csproj",
+        "packagesPath": "/home/louis/.nuget/packages/",
+        "outputPath": "/home/louis/Documents/dev/c#/FanucFastDev/RobotLibrary/obj/",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Louis\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "/home/louis/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net5.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -134,7 +122,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/5.0.103/RuntimeIdentifierGraph.json"
         }
       }
     }

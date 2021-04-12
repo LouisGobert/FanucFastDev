@@ -13,8 +13,6 @@ namespace RobotLibrary.InOut
         private int _num;
         public string State { get; private set; }
 
-        private static ushort _count = 1;
-
         public RO(int num)
         {
             _num = num;
@@ -37,10 +35,10 @@ namespace RobotLibrary.InOut
 
         public void on()
         {
-            Console.WriteLine("Ajout de OPPPPPRRNNNRNRNUUUUUIIINNG");
             Generation.appendLine(String.Format("  RO[{0}]=ON ;", _num));
             State = "ON";
         }
+
         public void off()
         {
             Generation.appendLine(String.Format("  RO[{0}]=OFF ;", _num));

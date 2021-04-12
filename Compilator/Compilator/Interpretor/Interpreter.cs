@@ -17,13 +17,13 @@ namespace Compilator.Interpretor
     public class Interpreter
     {
          //private static string savePath; --> remplacer par BUILD_PATH
-        private static string[] usedFunctionName = { "Main", "print", "wait" };
+        private static string[] usedFunctionName = { "Main", "print", "wait", "run" };
         private static int iFL; // L'index dans le fileLine
         private static string[] fileLine;
         private static StringBuilder sb;
         private static List<string> programList = new List<string>();
         private static List<string> _labelList = new List<string>();
-        private const string _EMPTY = "_EMPTY=true;";
+        private const string PASS = "PASS";
 
 
         public static string interprete()
@@ -197,28 +197,27 @@ namespace Compilator.Interpretor
                     labelMaker(s);
                     continue;
 
-                } else if (s.Contains(_EMPTY))
+                } 
+                else if (!s.Contains(PASS))
                 {
-                    continue;
+                    //continue;
+                    addLine(s);
                 }
 
 
-                addLine(s);
-
-                //Console.WriteLine(s);
-                //sb.Append(s + "\n");
 
 
             }
 
-            
             addLine("Generation.finish();\n}\n");
 
             //Console.WriteLine("\tGeneration.finish();\n\t}");
             //sb.Append("Generation.finish();\n}\n");
 
-
         }
+
+
+
 
         private static void labelMaker(string s)
         {
@@ -236,11 +235,6 @@ namespace Compilator.Interpretor
 
             addLine(String.Format("Generation.appendLine(\"  JMP LBL[{0}] ;\");", _labelList.IndexOf(s) + 1));
         }
-
-
-
-
-        
 
 
         /// <summary>

@@ -3,7 +3,7 @@ using System;
 
 namespace RobotLibrary
 {
-    public class mov
+    public class move
     {
         public static void linear(pos target, int fast, int smooth)
         {

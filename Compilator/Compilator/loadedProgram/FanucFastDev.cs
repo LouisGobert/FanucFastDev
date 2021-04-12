@@ -3,6 +3,7 @@ using System.Globalization;
 using RobotLibrary;
 using RobotLibrary.InOut;
 using RobotLibrary.Utils;
+using RobotLibrary.Reg;
 
 class FanucFastDev {
 
@@ -17,11 +18,12 @@ class FanucFastDev {
     public const int TP_PROGRAM = -1; // A définir le nom exacte
     public const int MACRO = 1;
     public static RO[] RO = RobotLibrary.InOut.RO.Init();
+    public static PR[] PR = RobotLibrary.Reg.PR.Init();
     private const string ON = "ON";
     private const string ON_FM = "ON+";
     private const string OFF = "OFF";
     private const string OFF_FD = "OFF-";
-    private static bool _EMPTY;
+    private static bool PASS;
 
 
 
@@ -62,6 +64,9 @@ class FanucFastDev {
         Program.type = TP_PROGRAM;
         Program.keepBlankLine = false;
 
+        run("T_REPLI");
+
+
         //! par Louis Gobert
         //! Set de UTOOL et UFRAME
         Uframe.set(frameOrange);
@@ -69,18 +74,23 @@ class FanucFastDev {
         T_OUV_PINCE();
 
         pos pApproche = new pos(1);
-        mov.joint(pApproche, 100, 50);
+        move.joint(pApproche, 100, 50);
         pos jRepli = new pos(2);
         
         pos pPrise = new pos(3);
 
-        mov.joint(jRepli, 12, 100);
-        mov.linear(pPrise, 123, FINE);
-        print("Prise de la pièce");
+        PR pCalculer = PR[12];
+        pCalculer.Desc = "Point calcule";
+        PR pTemp = PR[11];
+        pCalculer.set(pTemp);
+
+        move.joint(jRepli, 12, 100);
+        move.linear(pPrise, 123, FINE);
+        print("Prise de la piece");
         T_FERM_PINCE();
 
-        mov.linear(pApproche, 12, FINE);
-        mov.joint(jRepli, 12, FINE);
+        move.linear(pApproche, 12, FINE);
+        move.joint(jRepli, 12, FINE);
 
         print("Fin du programme.");
 
@@ -138,7 +148,7 @@ class FanucFastDev {
 
         Console.WriteLine(toPrint);
 
-        Utils.textVerify(ref toPrint, Const.COMMENT_MAX_CHAR);
+        StringUtils.textVerify(ref toPrint, Const.COMMENT_MAX_CHAR);
 
         Generation.appendLine(string.Format("  MESSAGE[{0}]  ;", toPrint));
     }
@@ -161,6 +171,10 @@ class FanucFastDev {
     static void wait(bool condition)
     {
 
+    }
+
+    static void run(string s) {
+        Generation.appendLine($"  RUN {s} ;");
     }
 
 

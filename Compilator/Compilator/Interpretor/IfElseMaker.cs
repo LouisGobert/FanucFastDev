@@ -72,7 +72,7 @@ namespace Compilator.Interpretor
         private static void putIfEmpty(int index, ref string[] fileLine)
         {
             if (fileLine[index].Trim().Length == 0)
-                fileLine[index] = "_EMPTY=true;";
+                fileLine[index] = "PASS";
 
         }
     }
