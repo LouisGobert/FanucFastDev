@@ -72,7 +72,7 @@ namespace Compilator.Interpretor
                 if (bracketNumber != 0)
                 {
                     if (iFL + 1 >= fileLine.Length)
-                        throw new Exception("Fin de la condition non valie.");
+                        throw new Exception("Fin de la condition non valide.");
                     else
                         line = fileLine[++iFL];
 
@@ -93,6 +93,7 @@ namespace Compilator.Interpretor
         {
             string word = line.Substring(index);
             int jumpIndex = word.IndexOfAny(separator);
+
             // On récupré le mot en entier (jusqu'au prochain séparateur)
             if (jumpIndex != -1)
             {
@@ -147,8 +148,7 @@ namespace Compilator.Interpretor
             switch (attribut)
             {
                 case "State":
-                    word = word.Replace(".State", ".format()");
-                    //index += 3;
+                    word = word.Replace(".State", ".ToString()");
                     break;
             }
         }

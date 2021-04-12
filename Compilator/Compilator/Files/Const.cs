@@ -11,12 +11,14 @@ namespace Compilator.Files
     class Const
     {
         /// Le chemin actuel (ou l'application se trouve).
-        private static string ACTUAL_PATH = Assembly.GetEntryAssembly().Location;
+        private static string ACTUAL_PATH = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
+
+        //private static string test = Path.GetDirectoryName(ACTUAL_PATH);
 
 
         /// Les chemins vers RobotLibrary.dll et vers un lieu tempon qui servira a stocké
         /// le .dll compilé, c'est lui qui générera en tant que tel le fichier .ls
-        public static string ROBOT_LIBRARY_DLL_PATH = Path.Combine(ACTUAL_PATH, "../../../../../RobotLibrary/obj/Debug/net5.0/RobotLibrary.dll");
+        public static string ROBOT_LIBRARY_DLL_PATH = Path.Combine(ACTUAL_PATH, "../../../../RobotLibrary/obj/Debug/net5.0/RobotLibrary.dll");
         public static string TMP_DLL_PATH =  Path.Combine(Path.GetTempPath(), "tmpGeneration.dll");
 
         //public static string solution_name = "FanucFastDev";
@@ -26,7 +28,7 @@ namespace Compilator.Files
 
         /// Le chemin que l'on va définir au début du programme et qui pointera vers 
         /// le programme .cs à compiler ainsi que son Path par défaut.
-        public static string DEFAULT_CS_PATH = Path.Combine(ACTUAL_PATH, "../../../Compilator/loadedProgram/");
+        public static string DEFAULT_CS_PATH = Path.Combine(ACTUAL_PATH, "../../../Compilator/loadedProgram/FanucFastDev.cs");
         public static string CS_PATH;      
 
 

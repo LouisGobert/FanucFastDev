@@ -7,8 +7,11 @@ using System.Threading.Tasks;
 namespace RobotLibrary.InOut
 {
 
-    public class RO
+    public class RO : IInOut
     {
+
+        private const string ON = "ON";
+        private const string OFF = "OFF";
 
         private int _num;
         public string State { get; private set; }
@@ -33,31 +36,22 @@ namespace RobotLibrary.InOut
         }
 
 
-        public void on()
+        public void On()
         {
-            Generation.appendLine(String.Format("  RO[{0}]=ON ;", _num));
-            State = "ON";
+            Generation.appendLine(String.Format("  {0}=ON ;", this.ToString()));
+            State = ON;
         }
 
-        public void off()
+        public void Off()
         {
-            Generation.appendLine(String.Format("  RO[{0}]=OFF ;", _num));
-            State = "OFF";
+            Generation.appendLine(String.Format("  {0}=OFF ;", this.ToString()));
+            State = OFF;
         }
 
-        public string format()
+        public override string ToString()
         {
             return "RO[" + _num + "]";
         }
 
-
-        public static void preCompile(string s)
-        {
-            if (s.Contains(".State"))
-            {
-                s.Replace("State", "format()");
-
-            }
-        }
     }
 }

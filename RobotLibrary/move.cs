@@ -14,7 +14,7 @@ namespace RobotLibrary
 
             string lissage = (smooth == 0) ? "FINE" : smooth.ToString();
 
-            #if  DEBUG 
+            #if  debug 
             Console.WriteLine($"Mouvement linéaire vers {target.m_name} | {fast}mm/sec | {lissage}");
             #endif
             Generation.appendLine(String.Format("L P[{0}{1}] {2}mm/sec {3}    ;",
@@ -31,7 +31,7 @@ namespace RobotLibrary
             string lissage = smoothFormat(smooth);
 
 
-            #if DEBUG
+            #if debug
             Console.WriteLine($"Mouvement articulaire vers {target.m_name} | {fast}% | {lissage}");
             #endif
 
@@ -48,9 +48,9 @@ namespace RobotLibrary
             string lissage = smoothFormat(smooth);
 
 
-            #if DEBUG
+            #if debug
             Console.WriteLine($"Mouvement circulaire en passant par {middle.m_name} vers {target.m_name} | {fast}mm/sec | {lissage}");
-#endif
+            #endif
 
             Console.WriteLine("Pos formaté : " + target.formatForBracket());
 

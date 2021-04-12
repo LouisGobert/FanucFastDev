@@ -25,14 +25,17 @@ namespace RobotLibrary
 
             frameNumber = number;
             frameDescription = description;
+
+            #if debug
             Console.WriteLine($"Nouveau frame : [{frameNumber}] - \"{frameDescription}\"");
+            #endif
         }
 
         public static void set(Uframe frame)
         {
             actualFrame = frame.frameNumber;
 
-            #if DEBUG
+            #if debug
             Console.WriteLine($"Changement de Uframe : [{frame.frameNumber}] - \"{frame.frameDescription}\"");
             #endif
 

@@ -47,22 +47,15 @@ namespace Compilator.Interpretor
                 // Mise a jour de Main et obtention de la liste des programmes
                 if (s.Contains("MainSolution()"))
                 {
-                    //s = s.Replace("MainSolution()", "Main()");
 
                     addLine(s);
-                    //Console.WriteLine(s);
-                    //sb.Append(s + "\n");
-
                     getAllProgramNames();
 
-                    continue;
+                    
                     
 
                 }
-
-
-                // Ajout de generator.Init
-                if (s.Contains("static") && s.Contains("void"))
+                else if (s.Contains("static") && s.Contains("void"))
                 {
                     // On vérifie que ce n'est pas le main ni le print
                     int index = s.IndexOf("void") + "void".Length;
@@ -74,20 +67,17 @@ namespace Compilator.Interpretor
                     if (!usedFunctionName.Contains(programName))
                     {
                         lsProgramInterprete(programName);
-                        continue;
+                        
+                    } else {
+                        addLine(s);
                     }
-
-
                     
+                } else {
+
+                    // Autre cas
+                    addLine(s);            
                 }
 
-
-
-
-                addLine(s);            
-
-                //Console.WriteLine(s);
-                //sb.Append(s + "\n");
                
             }
 
@@ -171,8 +161,6 @@ namespace Compilator.Interpretor
                     programName = s.Substring(0, s.IndexOf('(')).TrimStart();
                     addLine(String.Format("Generation.appendLine(\"  CALL {0}    ;\");", programName));
 
-                    //Console.WriteLine($"\tGeneration.appendLine(\"  CALL {programName}    ;\");");
-                    //sb.Append(String.Format("Generation.appendLine(\"  CALL {0}    ;\");", programName));
                     continue;
                 }
 
@@ -211,8 +199,6 @@ namespace Compilator.Interpretor
 
             addLine("Generation.finish();\n}\n");
 
-            //Console.WriteLine("\tGeneration.finish();\n\t}");
-            //sb.Append("Generation.finish();\n}\n");
 
         }
 
@@ -294,9 +280,7 @@ namespace Compilator.Interpretor
             // Déplacement jusqu'a la ligne après le '{'
             while (!(s = fileLine[iFL++]).Contains("{")) ;
 
-            Console.WriteLine(s + "\n");
-            sb.Append(s + "\n\n");
-
+            addLine(s + "\n");
 
             // on obtient la liste de tout les programmes
             while (!(s = fileLine[iFL++]).Contains("}"))
@@ -306,8 +290,9 @@ namespace Compilator.Interpretor
                     programList.Add(s.Trim());
                 }
 
-                Console.WriteLine($"\t{s}\n");
-                sb.Append(s + "\n");
+                addLine(s + "\n");
+                //Console.WriteLine($"\t{s}\n");
+                //sb.Append(s + "\n");
             }
 
             addLine(s);

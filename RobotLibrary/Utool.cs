@@ -25,11 +25,15 @@ namespace RobotLibrary
 
             toolNumber = number;
             toolDescription = description;
+
+            #if debug
             Console.WriteLine($"Nouveau tool : [{toolNumber}] - \"{toolDescription}\"");
+            #endif
         }
 
         public static void set(Utool tool) {
-            #if DEBUG
+
+            #if debug
             Console.WriteLine($"Changement de Utool : [{tool.toolNumber}] - \"{tool.toolDescription}\"");
             #endif
 

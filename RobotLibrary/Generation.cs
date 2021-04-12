@@ -20,20 +20,6 @@ namespace RobotLibrary
 
 
 
-        /* Initialisation de la génération du fichier .LS */
-        /*public static void globalInit() {
-
-            if (Directory.Exists(pathFolder))
-            {
-                globalPath = pathFolder;
-                Console.WriteLine("Lieu de sauvegarde : " + globalPath);
-            } else
-            {
-                throw new Exception("Le dossier sélectionner n'existe pas.");
-            }
-
-        }*/
-
         public static string setupInfo()
         {
 
@@ -106,7 +92,7 @@ namespace RobotLibrary
             string progFinal = setupInfo() + progInstru + "/POS\n" + pos.generateAllPoint() + "/END\n";
 
 
-            Console.WriteLine("\n\n########################################\n  Programme fini :\n");
+            Console.WriteLine("\n\n########################################\nProgramme généré :\n");
             Console.WriteLine(progFinal);
 
             // Création du fichier final

@@ -10,7 +10,7 @@ namespace RobotLibrary
 
             Comment.checkLenght(comment);
 
-            #if DEBUG
+            #if debug
             Console.WriteLine($"!{comment}");
             #endif
 

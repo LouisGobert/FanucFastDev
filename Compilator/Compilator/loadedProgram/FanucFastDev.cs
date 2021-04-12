@@ -18,14 +18,16 @@ class FanucFastDev {
     public const int TP_PROGRAM = -1; // A définir le nom exacte
     public const int MACRO = 1;
     public static RO[] RO = RobotLibrary.InOut.RO.Init();
+    public static F[]   F = RobotLibrary.InOut.F.Init();
     public static PR[] PR = RobotLibrary.Reg.PR.Init();
     private const string ON = "ON";
-    private const string ON_FM = "ON+";
+    private const string ON_FM = "ONFM";
     private const string OFF = "OFF";
-    private const string OFF_FD = "OFF-";
+    private const string OFF_FD = "OFFFD";
     private static bool PASS;
 
 
+#endregion
 
 
     //////////////////////////////////////////////////////
@@ -34,21 +36,15 @@ class FanucFastDev {
 
     public static void MainSolution()
     {
-#endregion
 
-        // Liste des programmes a créer : 
+        // Lister les programmes a créer : 
         T_PREMIER_TRAJ();
         T_OUV_PINCE();
         T_FERM_PINCE();
 
-#region
-#if DEBUG
-        //Console.ReadLine();
-#endif
-
     }
 
-#endregion
+
 
 
     // Déclaration des UserFrame des des UTools.
@@ -62,9 +58,19 @@ class FanucFastDev {
         Program.desc = "Trajectoire facile";
         Program.groupMask = "1,*,*,*,*";
         Program.type = TP_PROGRAM;
-        Program.keepBlankLine = false;
+        Program.keepBlankLine = true;
 
         run("T_REPLI");
+
+        F flagDemandeQualite = F[12];
+        flagDemandeQualite.Off();
+
+        if (flagDemandeQualite.State == ON) 
+        {
+            //! test
+            goto autreLabel;
+        }
+            
 
 
         //! par Louis Gobert
@@ -127,8 +133,8 @@ class FanucFastDev {
     {
         Program.groupMask = "*,*,*,*,*";
         //!B2 - Lecat Gobert
-        RO[7].off();
-        RO[8].on();
+        RO[7].Off();
+        RO[8].On();
         wait(1);
     }
 
@@ -136,8 +142,8 @@ class FanucFastDev {
     {
         Program.groupMask = "*,*,*,*,*";
         //!B2 - Lecat Gobert
-        RO[7].on();
-        RO[8].off();
+        RO[7].On();
+        RO[8].Off();
         wait(1);
     }
 
@@ -145,8 +151,9 @@ class FanucFastDev {
 
     static void print(string toPrint)
     {
-
+        #if debug
         Console.WriteLine(toPrint);
+        #endif
 
         StringUtils.textVerify(ref toPrint, Const.COMMENT_MAX_CHAR);
 
