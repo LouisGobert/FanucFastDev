@@ -28,7 +28,7 @@ CONTROL_CODE    = 00000000 00000000;
    6:J P[1] 100% CNT50    ;
    7:J P[2] 12% CNT100    ;
    8:L P[3] 123mm/sec FINE    ;
-   9:  MESSAGE[ss]  ;
+   9:  MESSAGE[f]  ;
   10:  CALL T_FERM_PINCE    ;
   11:L P[1] 12mm/sec FINE    ;
   12:J P[2] 12% FINE    ;
