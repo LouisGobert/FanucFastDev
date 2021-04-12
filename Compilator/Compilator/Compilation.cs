@@ -7,8 +7,8 @@ using System.IO;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
-using Compilator.FileGestion;
-using Compilator.Interpreter;
+using Compilator.Files;
+using Compilator.Interpretor;
 using Microsoft.CSharp;
 using RobotLibrary;
 using System.CodeDom.Compiler;
@@ -19,6 +19,7 @@ using System.Linq;
 using System.Runtime.Loader;
 using Microsoft.CodeAnalysis.Emit;
 
+
 namespace Compilator
 {
     class Compilation
@@ -26,14 +27,10 @@ namespace Compilator
 
         static Action<string> Write = Console.WriteLine;
 
-        public static void startCompilation(string path, bool keepBlankLine)
+        public static void startCompilation()
         {
 
-            string savePath = FileGestion.FileGestion.compiledFolder(path);
-            Console.WriteLine("SAVE PATH : " + savePath);
-
-
-            string preCompiledFile = Interpreter.Interpreter.start(savePath, keepBlankLine);
+            string preCompiledFile = Interpreter.interprete();
 
             if (Compilation.compile(preCompiledFile))
             {
@@ -55,7 +52,7 @@ namespace Compilator
                 typeof(System.Object).GetTypeInfo().Assembly.Location,
                 typeof(Console).GetTypeInfo().Assembly.Location,
                 Path.Combine(Path.GetDirectoryName(typeof(System.Runtime.GCSettings).GetTypeInfo().Assembly.Location), "System.Runtime.dll"),
-                "/home/louis/Documents/dev/c#/FanucFastDev/RobotLibrary/obj/Debug/net5.0/RobotLibrary.dll"
+                Files.Const.ROBOT_LIBRARY_DLL_PATH
             };
 
             MetadataReference[] references = refPaths.Select(r => MetadataReference.CreateFromFile(r)).ToArray();
@@ -69,7 +66,7 @@ namespace Compilator
 
 
             // Endroit ou le fichier .dll va être créé
-            string path = FileGestion.FileGestion.DEFAULT_DLL;
+            string path = Files.Const.TMP_DLL_PATH;
             
             // Compilation
             EmitResult compilationResult = compilation.Emit(path);
