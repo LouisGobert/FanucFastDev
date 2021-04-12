@@ -28,54 +28,6 @@ namespace Compilator.FileGestion
 
         }
 
-        private static bool moveFile(string pathSource, string pathDest)
-        {
-            try
-            {
-                // path du fichier source invalide
-                if (!File.Exists(pathSource))
-                {
-                    Console.WriteLine("Erreur lors du chargement : fichier source manquant.");
-                    return false;
-                }
-
-                // Vérification que la destination ne contient pas déjà un fichier portant le même nom
-                if (File.Exists(pathDest))
-                {
-                    File.Delete(pathDest);
-                    Console.WriteLine("Le fichier de destination existait déjà, il a été supprimé.");
-                }
-
-                // Déplacement du fichier.
-                File.Move(pathSource, pathDest);
-
-                // Vérification du déplacement
-                if (File.Exists(pathSource))
-                {
-                    Console.WriteLine("Le fichier existe toujours dans la destination. Ce qui ne devrait pas être le cas.");
-                    return false;
-                } else
-                {
-                    Console.WriteLine("Copie effectuée.");
-                    return true;
-                }
-
-                
-
-                    
-            } catch (Exception ex)
-            {
-                Console.WriteLine($"Erreur lors du déplacement : {ex}");
-                return false;
-            }
-
-        }
-
-        private static string saveSolution()
-        {
-
-            throw new NotImplementedException("Pas encore implémenté");
-        }
 
         private static string openSolution(string path)
         {
