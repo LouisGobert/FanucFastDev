@@ -11,10 +11,10 @@ namespace RobotLibrary
     {
         //public static string generatePath; // Le chemin du fichier .LS en cours de modification
 
-        private static int indexLsLine;
+        private static int _indexLsLine;
 
         //public static string globalPath;
-        private static string savePath;
+        private static string _BUILD_PATH;
 
         private static string progInstru;
 
@@ -36,23 +36,8 @@ namespace RobotLibrary
 
         public static string setupInfo()
         {
-            //savePath = newSavePath;
-            
 
-            // Supression des point déjà existant
-            /*
-            pos.deleteAllPos();
-
-            savePath += programName.ToUpper() + ".LS";
-            Console.WriteLine("GLOBAL path = " + savePath);
-            Console.WriteLine("Generated path = " + savePath);
-            indexLsLine = 1;*/
-
-
-            
-         
-
-            string progInfo =        $"/PROG  {Program.name}\n" 
+            string progInfo =    $"/PROG  {Program.name}\n" 
                                 + "/ATTR\n"
                                 + "OWNER       = MNEDITOR;\n"
                                 + $"COMMENT     = \"{Program.desc}\";\n"
@@ -61,7 +46,7 @@ namespace RobotLibrary
                                 + "MODIFIED    = DATE 20-10-15  TIME 16:10:46;\n"
                                 + "FILE_NAME   = ;\n"
                                 + "VERSION     = 0;\n"
-                                + $"LINE_COUNT  = {indexLsLine-1};\n"
+                                + $"LINE_COUNT  = {_indexLsLine-1};\n"
                                 + "MEMORY_SIZE = 1662;\n"
                                 + "PROTECT     = READ_WRITE;\n"
                                 + "TCD:  STACK_SIZE        = 0,\n"
@@ -76,21 +61,18 @@ namespace RobotLibrary
                                 + "/MN\n";
 
 
-
-
             return progInfo;
 
         }
 
 
-        public static void setup(string programName, string newSavePath)
+        public static void setup(string programName, string BUILD_PATH)
         {
 
             // Supression des point déjà existant
             pos.deleteAllPos();
-            savePath = newSavePath;
-            savePath += programName.ToUpper() + ".LS";
-            indexLsLine = 1;
+            _BUILD_PATH = Path.Combine(BUILD_PATH, programName.ToUpper() + ".LS");
+            _indexLsLine = 1;
             progInstru = string.Empty;
             Program.setDefault();
 
@@ -99,36 +81,41 @@ namespace RobotLibrary
 
         public static void appendLine(string line)
         {
-            //progInstru += $"   {indexLsLine}:{line}\n";
-            progInstru += string.Format("{0, 4}:{1}\n", indexLsLine++, line);
+            progInstru += string.Format("{0, 4}:{1}\n", _indexLsLine++, line);
         }
 
         public static void appendXBlankLine(int x)
         {
-            for (int i = 0; i < x; i++)
-                appendLine("   ;");
+            if (Program.keepBlankLine)
+                for (int i = 0; i < x; i++)
+                    appendLine("   ;");
+                    
         }
 
 
-
+        /// <summary>
+        ///     Fonction qui pest appelée lorsque qu'un programme .ls est fini.
+        ///     C'est ici que l'on va assemblé le string final qui contiendra tout
+        ///     le programme .ls. 
+        ///     
+        ///     On enregistrera le tout dans le fichier pointé par BUILD_PATH
+        /// </summary>
         public static void finish()
         {
 
             string progFinal = setupInfo() + progInstru + "/POS\n" + pos.generateAllPoint() + "/END\n";
 
 
-
-
-            Console.WriteLine("\n\n########################################\nFinished program :\n");
+            Console.WriteLine("\n\n########################################\n  Programme fini :\n");
             Console.WriteLine(progFinal);
 
             // Création du fichier final
-            Console.WriteLine("Fichier créer sous : " + savePath);
+            Console.WriteLine("Fichier créer sous : " + _BUILD_PATH);
             try
             {
-                if (File.Exists(savePath))
-                    File.Delete(savePath);
-                FileStream fs = File.Create(savePath);
+                if (File.Exists(_BUILD_PATH))
+                    File.Delete(_BUILD_PATH);
+                FileStream fs = File.Create(_BUILD_PATH);
 
                 using (StreamWriter sw = new StreamWriter(fs, Encoding.ASCII))
                 {
@@ -140,8 +127,5 @@ namespace RobotLibrary
             }
 
         }
-
-
-        
     }
 }

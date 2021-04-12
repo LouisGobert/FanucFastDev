@@ -55,13 +55,12 @@ class FanucFastDev {
 
 
 
-
-
     static void T_PREMIER_TRAJ()
     {
         Program.desc = "Trajectoire facile";
         Program.groupMask = "1,*,*,*,*";
         Program.type = TP_PROGRAM;
+        Program.keepBlankLine = false;
 
         //! par Louis Gobert
         //! Set de UTOOL et UFRAME

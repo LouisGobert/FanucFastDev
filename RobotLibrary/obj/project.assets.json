@@ -8,24 +8,31 @@
     "net5.0": []
   },
   "packageFolders": {
-    "/home/louis/.nuget/packages/": {}
+    "C:\\Users\\Louis\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/louis/Documents/dev/c#/FanucFastDev/RobotLibrary/RobotLibrary.csproj",
+      "projectUniqueName": "C:\\Users\\Louis\\Desktop\\dev\\git\\RobotLibrary\\RobotLibrary.csproj",
       "projectName": "RobotLibrary",
-      "projectPath": "/home/louis/Documents/dev/c#/FanucFastDev/RobotLibrary/RobotLibrary.csproj",
-      "packagesPath": "/home/louis/.nuget/packages/",
-      "outputPath": "/home/louis/Documents/dev/c#/FanucFastDev/RobotLibrary/obj/",
+      "projectPath": "C:\\Users\\Louis\\Desktop\\dev\\git\\RobotLibrary\\RobotLibrary.csproj",
+      "packagesPath": "C:\\Users\\Louis\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Louis\\Desktop\\dev\\git\\RobotLibrary\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "/home/louis/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\Louis\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net5.0"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -58,7 +65,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/5.0.103/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
       }
     }
   }
