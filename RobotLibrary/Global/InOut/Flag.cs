@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RobotLibrary.InOut
+namespace RobotLibrary.Global.InOut
 {
 
-    public class F : IInOut
+    public class Flag : IInOut
     {
 
         private const string ON = "ON";
@@ -16,18 +16,18 @@ namespace RobotLibrary.InOut
         private int _num;
         public string State { get; private set; }
 
-        public F(int num)
+        public Flag(int num)
         {
             _num = num;
         }
 
-        public static F[] Init()
+        public static Flag[] Init()
         {
 
-            F[] list = new F[Const.MAX_F + 1];
+            Flag[] list = new Flag[Const.MAX_F + 1];
             for (int i = 0; i < Const.MAX_F+1; i++)
             {
-                list[i] = new F(i);
+                list[i] = new Flag(i);
             }
 
             return list;

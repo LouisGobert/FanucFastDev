@@ -1,10 +1,11 @@
-/*using System;
+using System;
 using System.Globalization;
 using RobotLibrary;
-using RobotLibrary.InOut;
+using RobotLibrary.Global;
+using RobotLibrary.Global.InOut;
 using RobotLibrary.Utils;
-using RobotLibrary.Reg;
 
+/*
 class FanucFastDev {
 
 #region 
@@ -18,8 +19,8 @@ class FanucFastDev {
     public const int TP_PROGRAM = -1; // A définir le nom exacte
     public const int MACRO = 1;
     public static RO[] RO = RobotLibrary.InOut.RO.Init();
-    public static F[]   F = RobotLibrary.InOut.F.Init();
-    public static PR[] PR = RobotLibrary.Reg.PR.Init();
+    public static Flag[]   F = RobotLibrary.InOut.Flag.Init();
+    public static PosReg[] PR = RobotLibrary.Reg.PosReg.Init();
     private const string ON = "ON";
     private const string ON_FM = "ONFM";
     private const string OFF = "OFF";
@@ -55,15 +56,15 @@ class FanucFastDev {
 
     static void T_PREMIER_TRAJ()
     {
-        Program.desc = "Trajectoire facile";
-        Program.groupMask = "1,*,*,*,*";
-        Program.type = TP_PROGRAM;
-        Program.keepBlankLine = true;
+        ProgramInfo.desc = "Trajectoire facile";
+        ProgramInfo.groupMask = "1,*,*,*,*";
+        ProgramInfo.type = TP_PROGRAM;
+        ProgramInfo.keepBlankLine = true;
 
         run("T_REPLI");
 
-        F flagDemandeQualite = F[1];
-        F flagTest = F[2];
+        Flag flagDemandeQualite = F[1];
+        Flag flagTest = F[2];
         flagDemandeQualite.Off();
 
         if (flagDemandeQualite.State == ON && flagTest.State == OFF || flagTest.State == ON) {
@@ -79,15 +80,15 @@ class FanucFastDev {
         Utool.set(toolPince);
         T_OUV_PINCE();
 
-        pos pApproche = new pos(1);
+        Pos pApproche = new Pos(1);
         move.joint(pApproche, 100, 50);
-        pos jRepli = new pos(2);
+        Pos jRepli = new Pos(2);
         
-        pos pPrise = new pos(3);
+        Pos pPrise = new Pos(3);
 
-        PR pCalculer = PR[12];
+        PosReg pCalculer = PR[12];
         pCalculer.Desc = "Point calcule";
-        PR pTemp = PR[11];
+        PosReg pTemp = PR[11];
         pCalculer.set(pTemp);
 
         move.joint(jRepli, 12, 100);
@@ -131,7 +132,7 @@ class FanucFastDev {
 
     static void T_FERM_PINCE()
     {
-        Program.groupMask = "*,*,*,*,*";
+        ProgramInfo.groupMask = "*,*,*,*,*";
         //!B2 - Lecat Gobert
         RO[7].Off();
         RO[8].On();
@@ -140,7 +141,7 @@ class FanucFastDev {
 
     static void T_OUV_PINCE()
     {
-        Program.groupMask = "*,*,*,*,*";
+        ProgramInfo.groupMask = "*,*,*,*,*";
         //!B2 - Lecat Gobert
         RO[7].On();
         RO[8].Off();
@@ -192,8 +193,7 @@ class FanucFastDev {
 }
 
 
-
-
-
-
 */
+
+
+

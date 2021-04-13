@@ -1,15 +1,12 @@
-﻿/// TO IMPLEMENT :  - Program.keepBlanckLine
-///                 - géré l'affichage en console
+﻿#define debug
 
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Compilator.Interpretor;
 using Compilator.Files;
 using RobotLibrary;
 using Microsoft.CSharp;
-using Compilator.Files;
 
 
 namespace Compilator.Interpretor
@@ -29,7 +26,7 @@ namespace Compilator.Interpretor
         public static string interprete()
         {
             // Ouverture de FanucFastDev.cs
-            fileLine = FileGestion.getFileLine();
+            fileLine = FileGestion.getFileLine(Files.Const.CS_PATH);
 
             // C'est lui qui va contenir tout les lignes a compiler
             sb = new StringBuilder();
@@ -45,14 +42,12 @@ namespace Compilator.Interpretor
                 s = fileLine[iFL];
 
                 // Mise a jour de Main et obtention de la liste des programmes
-                if (s.Contains("MainSolution()"))
+                if (s.Contains("Main_" + Files.Const.CS_NAME))
                 {
 
                     addLine(s);
                     getAllProgramNames();
 
-                    
-                    
 
                 }
                 else if (s.Contains("static") && s.Contains("void"))
@@ -170,7 +165,7 @@ namespace Compilator.Interpretor
                 // Si c'est un if {
                 if (s.StartsWith("if"))
                 {
-                    IfElseMaker.ifMaker(iFL, ref fileLine);
+                    IfElseMaker.IfMaker(iFL, ref fileLine);
                     continue;
                 }
 
@@ -185,7 +180,9 @@ namespace Compilator.Interpretor
                     labelMaker(s);
                     continue;
 
-                } 
+                } else if (s.StartsWith("for")) {
+                    ForMaker.Make(iFL, ref fileLine);
+                }
                 else if (!s.Contains(PASS))
                 {
                     //continue;
@@ -197,7 +194,7 @@ namespace Compilator.Interpretor
 
             }
 
-            addLine("Generation.finish();\n}\n");
+            addLine("Generation.Save();\n}\n");
 
 
         }
@@ -221,6 +218,8 @@ namespace Compilator.Interpretor
 
             addLine(String.Format("Generation.appendLine(\"  JMP LBL[{0}] ;\");", _labelList.IndexOf(s) + 1));
         }
+
+        
 
 
         /// <summary>

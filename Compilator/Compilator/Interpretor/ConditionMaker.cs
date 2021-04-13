@@ -34,71 +34,89 @@ namespace Compilator.Interpretor
     {
         private static char[] separator = { '&', '|', '(', ')', ' ', '=' };
         private static StringBuilder conditionBuilder;
-        private static int bracketNumber;
-        private static string line;
-        private static int index;
+        private static int _bracketNumber;
+        private static char _atIndex;
+        private static string _line;
+        private static int _lineIndex;
 
         public static string make(ref int iFL, string[] fileLine)
         {
             // On obtient la condition pure --> "(x == 1)"
-            line = fileLine[iFL];
-            line = line.Substring(line.IndexOf("(") + 1);
+            _line = fileLine[iFL];
+            _line = _line.Substring(_line.IndexOf("(") + 1);
 
             conditionBuilder = new StringBuilder();
             conditionBuilder.Append('(');
-            bracketNumber = 1;
+            _bracketNumber = 1;
 
 
-            char atIndex;
-
-            while (bracketNumber != 0)
+            /*while (_bracketNumber != 0)
             {
 
-                for (index = 0; index < line.Length; index++)
+                for (_lineIndex = 0; _lineIndex < _line.Length; _lineIndex++)
                 {
-                    atIndex = line[index];
+                    _atIndex = _line[_lineIndex];
 
-                    if (separator.Contains(atIndex))
+                    if (separator.Contains(_atIndex))
                     {
-                        separatorAnalysis(atIndex);
+                        separatorAnalysis();
                     }
-                    else if (!char.IsWhiteSpace(atIndex))
+                    else if (!char.IsWhiteSpace(_atIndex))
                     {
-                        wordAnalysis(atIndex);
+                        wordAnalysis();
                     }
-
                 }
-
-                if (bracketNumber != 0)
+                if (_bracketNumber != 0)
                 {
                     if (iFL + 1 >= fileLine.Length)
                         throw new Exception("Fin de la condition non valide.");
                     else
-                        line = fileLine[++iFL];
+                        _line = fileLine[++iFL];
 
                 }
+            }*/
+
+            _lineIndex = 0;
+            while (_bracketNumber != 0 && _lineIndex < _line.Length) 
+            {
+
+                _atIndex = _line[_lineIndex];
+
+                if (separator.Contains(_atIndex))
+                    separatorAnalysis();
+                else if (!char.IsWhiteSpace(_atIndex))
+                    wordAnalysis();
 
 
+                // If we are at the end of the line and the _bracketNumber != 0
+                if (_bracketNumber != 0) {}
 
+                if (++_lineIndex >= _line.Length && _bracketNumber != 0) {
+                    if (iFL + 1 >= fileLine.Length)
+                        throw new Exception("Fin de la condition non valide.");
+                    else {
+                        _lineIndex = 0;
+                        _line = fileLine[++iFL];
+                    }
+                }
+                
             }
-
-
 
 
 
             return conditionBuilder.ToString();
         }
 
-        private static void wordAnalysis(char atIndex)
+        private static void wordAnalysis()
         {
-            string word = line.Substring(index);
+            string word = _line.Substring(_lineIndex);
             int jumpIndex = word.IndexOfAny(separator);
 
             // On récupré le mot en entier (jusqu'au prochain séparateur)
             if (jumpIndex != -1)
             {
                 word = word.Substring(0, word.IndexOfAny(separator));
-                index += jumpIndex-1;
+                _lineIndex += jumpIndex-1;
             }
             else
             {
@@ -154,32 +172,37 @@ namespace Compilator.Interpretor
         }
         
 
-        private static void separatorAnalysis(char atIndex)
+        private static void separatorAnalysis()
         {
-            switch (atIndex)
+            switch (_atIndex)
             {
                 case  ' ':
                     break;
                 case '(':
-                    bracketNumber++;
+                    _bracketNumber++;
                     conditionBuilder.Append('(');
                     break;
                 case ')':
-                    bracketNumber--;
+                    _bracketNumber--;
                     conditionBuilder.Append(')');
                     break;
                 case '&':
-                    if (line[index+1] == '&')
-                        index++;
-                    conditionBuilder.Append("AND");
+                    if (_line[_lineIndex+1] == '&')
+                        _lineIndex++;
+                    conditionBuilder.Append(" AND ");
+                    break;
+                case '|':
+                    if (_line[_lineIndex+1] == '|')
+                        _lineIndex++;
+                    conditionBuilder.Append(" OR ");
                     break;
                 case '=':
-                    if (line[index+1] == '=')
-                        index++;
+                    if (_line[_lineIndex+1] == '=')
+                        _lineIndex++;
                     conditionBuilder.Append("=");
                     break;
                 default:
-                    throw new NotImplementedException("\"atIndex\" n'est pas encore implémenté");
+                    throw new NotImplementedException($" \" { _atIndex} \" n'est pas encore implémenté");
                     
 
             }

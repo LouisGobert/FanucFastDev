@@ -1,18 +1,15 @@
-// TO IMPLEMENT : meilleur gestion de l'exeption
-
-
 using System;
 using System.Collections.Generic;
 
-namespace RobotLibrary
+namespace RobotLibrary.Global
 {
 
 
     public class Utool
     {
 
-        private int toolNumber;
-        private string toolDescription;
+        private int _toolNumber;
+        private string _toolDescription;
         private static List<int> toolList = new List<int>();
 
         public Utool(int number, string description) {
@@ -23,22 +20,22 @@ namespace RobotLibrary
 
             toolList.Add(number);
 
-            toolNumber = number;
-            toolDescription = description;
+            _toolNumber = number;
+            _toolDescription = description;
 
             #if debug
-            Console.WriteLine($"Nouveau tool : [{toolNumber}] - \"{toolDescription}\"");
+            Console.WriteLine($"Nouveau tool : [{_toolNumber}] - \"{_toolDescription}\"");
             #endif
         }
 
         public static void set(Utool tool) {
 
             #if debug
-            Console.WriteLine($"Changement de Utool : [{tool.toolNumber}] - \"{tool.toolDescription}\"");
+            Console.WriteLine($"Changement de Utool : [{tool._toolNumber}] - \"{tool._toolDescription}\"");
             #endif
 
 
-            Generation.appendLine(String.Format("  UTOOL_NUM={0} ;", tool.toolNumber));
+            Generation.appendLine(String.Format("  UTOOL_NUM={0} ;", tool._toolNumber));
         }
 
         

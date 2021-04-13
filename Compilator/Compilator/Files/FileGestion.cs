@@ -10,23 +10,7 @@ namespace Compilator.Files
     class FileGestion
     {
         
-        /*
-        private static string openSolution(string path)
-        {
-            /* Ouvre une solution et vérifie qu'elle contient une class FanucFastDev 
-
-
-            if (File.Exists(path)) {
-                string[] fileContent = File.ReadAllLines(path);
-
-                // Vérification de la contenance du class 
-                foreach (string s in fileContent)
-                    if (s.Contains("class"))
-                        return path;
-            }
-
-            return null;
-        }*/
+    
 
 
         public static string[] getFileLine(string path) {
@@ -44,24 +28,78 @@ namespace Compilator.Files
 
         }
 
-        /// Surcharge de la fonction affin de rendre l'autre fonction getFileLine
-        /// plus flexibles.
-        public static string[] getFileLine() {
-            return getFileLine(Const.CS_PATH);
+
+        public static int NewTemplate(string[] args)
+        {
+
+            // On vérifie qu'il n'y a pas de .cs
+            string csName = (Path.GetExtension(args[1]) == string.Empty) ? args[1] : args[1].Substring(0, args[1].IndexOf('.'))  ;
+            string newTemplatePath = Path.Combine(Const.DEFAULT_CS_PATH, csName + ".cs");
+
+            // On vérifié qu'un fichier n'existe pas déjà sous le même nom.
+            if (File.Exists(newTemplatePath))
+            {
+
+                Console.WriteLine($"Un fichier portant le nom \"{csName}\" existe déjà dans le dossier \"{Const.DEFAULT_CS_PATH}\"");
+
+                string choice;
+                do
+                {
+                    Console.Write("Voulez-vous l'écraser ? [(O)ui / (n)on] ?");
+                    choice = Console.ReadLine();
+                } while (choice.Length != 1 && (choice[0] != 'O' || choice[0] != 'n'));
+
+                // Annulation
+                if (choice[0] == 'n')
+                {
+                    Console.WriteLine("Annulation de la création.");
+                    return (int)Program.ExitCode.Cancel;
+                }
+            }
+
+            /// Ouverture de la template
+            /// Changement de son nom de class
+            /// Changement de sa fonction d'entré (Main)
+            /// Enregistrement dans newTemplatesPath
+
+            string[] templateLines = getFileLine(Const.CS_TEMPLATE_PATH);
+
+            string line;
+            for (int i = 0; i < templateLines.Length; i++) {
+                line = templateLines[i];
+
+                if (line.Contains("TEMPLATE_CLASS"))
+                    templateLines[i] = templateLines[i].Replace("TEMPLATE_CLASS", csName);
+                else if (line.Contains("TEMPLATE_MAIN")) {
+                    templateLines[i] = templateLines[i].Replace("TEMPLATE_MAIN", "Main_" + csName);
+
+                    i = templateLines.Length;
+                }
+            }
+
+            try 
+            {
+                FileStream fs = File.Create(newTemplatePath);
+
+                using (StreamWriter sw = new StreamWriter(fs))
+                {
+                    
+                    foreach (string l in templateLines) {
+                        sw.WriteLine(l);
+                    }
+
+                }
+            } 
+            catch 
+            {
+                Console.WriteLine("Erreur lors de la création du fichier.");
+            }
+
+            Console.WriteLine($"Creation du fichier \"{csName}\" dans le dossier \"Workcell/\" réussi.");
+
+            return (int)Program.ExitCode.Succes;
+
         }
 
-
-        /*public static string compiledFolder(string path)
-        {
-            /* Permet de spécifé le lieu de sauvegarde d'une solution 
-
-            /// PAR DEFAULT DANS LE Même répéertoire que le fichier FanucFastDev.cs
-
-            return path;
-            
-
-            return null;
-        }*/
-       
     }
 }

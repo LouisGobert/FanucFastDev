@@ -10,7 +10,7 @@ namespace RobotLibrary.Utils
     {
         private static char[] accent = { 'é', 'è', 'ê', 'â', 'û', 'î' };
 
-        public static void textVerify(ref string s, int maxLength)
+        public static void TextVerify(ref string s, int maxLength)
         {
 
             if (s.Length > maxLength)
@@ -19,7 +19,7 @@ namespace RobotLibrary.Utils
                                          $"Veuillez introduire une phrase plus courte : ");
 
                 s = Console.ReadLine();
-                textVerify(ref s, maxLength);
+                TextVerify(ref s, maxLength);
                 return;
             }
                 
@@ -34,7 +34,7 @@ namespace RobotLibrary.Utils
                     s = Console.ReadLine();
 
                     // Vérification de la nouvelle phrase
-                    textVerify(ref s, maxLength);
+                    TextVerify(ref s, maxLength);
                     return;
 
                 }

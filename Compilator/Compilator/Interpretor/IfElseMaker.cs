@@ -10,7 +10,7 @@ namespace Compilator.Interpretor
     public class IfElseMaker
     {
 
-        public static void ifMaker(int iFL, ref string[] fileLine)
+        public static void IfMaker(int iFL, ref string[] fileLine)
         {
 
 

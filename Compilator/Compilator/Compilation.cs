@@ -76,7 +76,7 @@ namespace Compilator
                 // Chargement de du dll puis exécution
                 Assembly asm = AssemblyLoadContext.Default.LoadFromAssemblyPath(path);
 
-                object result = asm.GetType("FanucFastDev").GetMethod("MainSolution").Invoke(null, null);
+                object result = asm.GetType(Files.Const.CS_NAME).GetMethod("Main_" + Files.Const.CS_NAME).Invoke(null, null);
             } 
             else
             {

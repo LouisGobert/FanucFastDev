@@ -1,4 +1,5 @@
-﻿using System;
+﻿//#define debug
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -23,10 +24,10 @@ namespace RobotLibrary
         public static string setupInfo()
         {
 
-            string progInfo =    $"/PROG  {Program.name}\n" 
+            string progInfo =    $"/PROG  {ProgramInfo.name}\n" 
                                 + "/ATTR\n"
                                 + "OWNER       = MNEDITOR;\n"
-                                + $"COMMENT     = \"{Program.desc}\";\n"
+                                + $"COMMENT     = \"{ProgramInfo.desc}\";\n"
                                 + "PROG_SIZE   = 1382;\n"
                                 + "CREATE      = DATE 20-10-15  TIME 15:42:30;\n"
                                 + "MODIFIED    = DATE 20-10-15  TIME 16:10:46;\n"
@@ -41,7 +42,7 @@ namespace RobotLibrary
                                 + "      BUSY_LAMP_OFF     = 0,\n"
                                 + "      ABORT_REQUEST     = 0,\n"
                                 + "      PAUSE_REQUEST     = 0;\n"
-                                + $"DEFAULT_GROUP   = {Program.groupMask};\n"
+                                + $"DEFAULT_GROUP   = {ProgramInfo.groupMask};\n"
                                 + "CONTROL_CODE    = 00000000 00000000;\n"
                                 + "/APPL\n"
                                 + "/MN\n";
@@ -56,13 +57,13 @@ namespace RobotLibrary
         {
 
             // Supression des point déjà existant
-            pos.deleteAllPos();
+            Pos.deleteAllPos();
             _BUILD_PATH = Path.Combine(BUILD_PATH, programName.ToUpper() + ".LS");
             _indexLsLine = 1;
             progInstru = string.Empty;
-            Program.setDefault();
+            ProgramInfo.setDefault();
 
-            Program.name = programName;
+            ProgramInfo.name = programName;
         }
 
         public static void appendLine(string line)
@@ -72,7 +73,7 @@ namespace RobotLibrary
 
         public static void appendXBlankLine(int x)
         {
-            if (Program.keepBlankLine)
+            if (ProgramInfo.keepBlankLine)
                 for (int i = 0; i < x; i++)
                     appendLine("   ;");
                     
@@ -86,17 +87,17 @@ namespace RobotLibrary
         ///     
         ///     On enregistrera le tout dans le fichier pointé par BUILD_PATH
         /// </summary>
-        public static void finish()
+        public static void Save()
         {
 
-            string progFinal = setupInfo() + progInstru + "/POS\n" + pos.generateAllPoint() + "/END\n";
+            string progFinal = setupInfo() + progInstru + "/POS\n" + Pos.generateAllPoint() + "/END\n";
 
-
+#if debug
             Console.WriteLine("\n\n########################################\nProgramme généré :\n");
             Console.WriteLine(progFinal);
+#endif           
 
             // Création du fichier final
-            Console.WriteLine("Fichier créer sous : " + _BUILD_PATH);
             try
             {
                 if (File.Exists(_BUILD_PATH))
@@ -111,6 +112,8 @@ namespace RobotLibrary
             {
                 Console.WriteLine($"Erreur = {ex}");
             }
+
+            Console.WriteLine("Fichier créer dans : " + Path.GetRelativePath(Directory.GetCurrentDirectory(), _BUILD_PATH));
 
         }
     }

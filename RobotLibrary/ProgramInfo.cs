@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RobotLibrary
 {
-    public class Program
+    public class ProgramInfo
     {
         public static string name;
         public static string desc;          // La descirption du programme

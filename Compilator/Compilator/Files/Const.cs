@@ -28,7 +28,7 @@ namespace Compilator.Files
 
         /// Le chemin que l'on va définir au début du programme et qui pointera vers 
         /// le programme .cs à compiler ainsi que son Path par défaut.
-        public static string DEFAULT_CS_PATH = Path.Combine(ACTUAL_PATH, "../../../Compilator/loadedProgram/FanucFastDev.cs");
+        public static string DEFAULT_CS_PATH = Path.Combine(ACTUAL_PATH, "../../../Workcell/");
         public static string CS_PATH;      
 
 
@@ -36,6 +36,11 @@ namespace Compilator.Files
         /// ou l'on shouaite stocké les fichiers .ls généres ainsi que son Path par défaut.
         public static string DEFAULT_BUILD_PATH = Path.Combine(ACTUAL_PATH, "../../../../Build/");
         public static string BUILD_PATH;
-     
+
+
+        public static string CS_TEMPLATE_PATH = Path.Combine(ACTUAL_PATH, "../../../Compilator/Src/TEMPLATE_CLASS.cs");
+
+        public static string CS_NAME;
+
     }
 }

@@ -2,16 +2,39 @@
 using System.Collections.Generic;
 using System.IO;
 using Compilator.Files;
-using System.Reflection;
+using Compilator.Files;
 
 
 namespace Compilator
 {
     class Program
     {
+
+        public enum ExitCode : int
+        {
+            Cancel = 0,
+            Succes = 1,
+            ErrorArgs = -1,
+            ErrorNotFound = -2
+        }
+
         static int Main(string[] args)
         {
 
+            if (args.Length < 2)
+            {
+                Console.WriteLine("Argument manquant.");
+                PrintUsage();
+                return (int)ExitCode.ErrorArgs;
+            }
+            else if (args[0] == "-n" || args[0] == "new")
+                return FileGestion.NewTemplate(args);
+            else if (args[0] == "-b" || args[0] == "build")
+                return BuildTemplate(args);
+
+
+
+            /*
             List<string> arguments = new List<string>(args);
 
             if (arguments.Count == 0) {
@@ -49,19 +72,47 @@ namespace Compilator
                 Console.WriteLine("Début de la génération...");
                 Compilation.startCompilation(); // true pour garder les lignes vides
                 
-            }
+            }*/
 
-            Console.WriteLine("Fin de la génération.");
-
-            return 1;
+            PrintUsage();
+            return (int)ExitCode.ErrorArgs;
         }
 
-        private static void usagePrint() {
+        private static int BuildTemplate(string[] args) {
+
+            // Folder path by default, not implemented
+            Const.BUILD_PATH = Const.DEFAULT_BUILD_PATH;
+
+            // Obtention du nom sans le .cs
+            string buildName = (Path.GetExtension(args[1]) == string.Empty) ? args[1] : args[1].Substring(0, args[1].IndexOf('.'))  ;
+
+            Const.CS_PATH = Path.Combine(Const.DEFAULT_CS_PATH, buildName + ".cs");
+
+
+            if (File.Exists(Const.CS_PATH)) {
+
+                Const.CS_NAME = buildName;
+                Console.WriteLine("Début de la génération...");
+                Compilation.startCompilation();
+                return (int)ExitCode.Succes;
+            } 
+            else 
+            {
+                Console.WriteLine($"Le nom du fichier \"{buildName}\" n'existe pas dans le dossier \"{Const.DEFAULT_CS_PATH}\"");
+                return (int)ExitCode.ErrorNotFound;
+            }
+        }
+
+        
+
+
+
+        private static void PrintUsage() {
             Console.WriteLine(  "Usage:  \n" +
-                    "  ./Compilator [OPTION] <program source> <folder dest>\n\n" +
-                    "Application Options:\n" +
-                    "  -c, --cs                 Programme Source par défaut\n" +
-                    "  -b, --build              Dossier de stockage par défaut\n");
+                    "  ./Compilator [ACTION] [FILE NAME]\n\n" +
+                    "Application Actions:\n" +
+                    "  -n ,  new         Créer une nouvelle template .cs\n" +
+                    "  -b ,  build       Dossier de stockage par défaut\n");
         }
 
     }

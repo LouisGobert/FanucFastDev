@@ -5,10 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using RobotLibrary.Utils;
 
-namespace RobotLibrary.Reg
+namespace RobotLibrary.Global
 {
 
-    public class PR
+    public class PosReg
     {
 
         private int _num;
@@ -19,7 +19,7 @@ namespace RobotLibrary.Reg
 
             set {
                 // On vérifie la description
-                StringUtils.textVerify(ref value, Const.PR_DESC_MAX_CHAR);
+                StringUtils.TextVerify(ref value, Const.PR_DESC_MAX_CHAR);
 
                 _desc = value;
             }
@@ -27,7 +27,7 @@ namespace RobotLibrary.Reg
 
         public int[] Coo;
 
-        public PR(int num)
+        public PosReg(int num)
         {
             _num = num;
             _desc = string.Empty;
@@ -38,19 +38,19 @@ namespace RobotLibrary.Reg
 
 
 
-        public static PR[] Init()
+        public static PosReg[] Init()
         {
 
-            PR[] list = new PR[Const.MAX_PR + 1];
+            PosReg[] list = new PosReg[Const.MAX_PR + 1];
             for (int i = 0; i < Const.MAX_PR+1; i++)
             {
-                list[i] = new PR(i);
+                list[i] = new PosReg(i);
             }
 
             return list;
         }
 
-        public void set(PR newPR) {
+        public void Set(PosReg newPR) {
             Coo = newPR.Coo;
             Generation.appendLine($"  {this}={newPR}    ;");
         }
@@ -74,6 +74,12 @@ namespace RobotLibrary.Reg
                 s.Replace("State", "format()");
 
             }
+        }
+
+
+        public string formatForBracket()
+        {
+            return "PR[" + this._num + ((this._desc == string.Empty) ? string.Empty : ":" + this._desc) + "]" ;
         }
     }
 }

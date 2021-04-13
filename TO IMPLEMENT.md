@@ -1,6 +1,7 @@
 #### A corriger 
 
 * Gestion du '{' si il se trouve sur la même ligne que le if.
+* Passer le P et J en bool --> actuellement en ushort
     
 
 #### A implémenter
@@ -10,6 +11,7 @@
 * Gestion de memory size dans les paramètres du fichier .ls
 * Gestion du type de programme dans les paramètres du fichier ls
 * FOR
+* Vérifie que la vitesse > 0
 
 
 #### A vérifier

@@ -1,75 +1,49 @@
 using System;
+using RobotLibrary.Global;
 
 
 namespace RobotLibrary
 {
     public class move
     {
-        public static void linear(pos target, int fast, int smooth)
-        {
-
-            if (smooth < 0)
-                throw new FormatException("Le lissage d'un mouvement doit être strictement supérieure à 0");
-
-
-            string lissage = (smooth == 0) ? "FINE" : smooth.ToString();
-
-            #if  debug 
-            Console.WriteLine($"Mouvement linéaire vers {target.m_name} | {fast}mm/sec | {lissage}");
-            #endif
-            Generation.appendLine(String.Format("L P[{0}{1}] {2}mm/sec {3}    ;",
-                                                target.m_num,
-                                                target.formatForBracket(),
-                                                fast, 
-                                                smoothFormat(smooth)));
-
-        }
-
-        public static void joint(pos target, int fast, int smooth)
-        {
-
-            string lissage = smoothFormat(smooth);
-
-
-            #if debug
-            Console.WriteLine($"Mouvement articulaire vers {target.m_name} | {fast}% | {lissage}");
-            #endif
-
-            Generation.appendLine(String.Format("J P[{0}{1}] {2}% {3}    ;",
-                                                target.m_num,
-                                                target.formatForBracket(),
-                                                fast,
-                                                lissage));
+        private static void GlobalMove(char pointType, string targetFormated, ushort fast, ushort smooth) {
+            Generation.appendLine($"{pointType} {targetFormated} {fast}{((pointType == 'L') ? "mm/sec" : "%")} {smoothFormat(smooth)}    ;");
         }
 
 
-        public static void circular(pos middle, pos target, int fast, int smooth)
+        public static void linear(Pos target, ushort fast, ushort smooth)
         {
-            string lissage = smoothFormat(smooth);
-
-
-            #if debug
-            Console.WriteLine($"Mouvement circulaire en passant par {middle.m_name} vers {target.m_name} | {fast}mm/sec | {lissage}");
-            #endif
-
-            Console.WriteLine("Pos formaté : " + target.formatForBracket());
-
-            Generation.appendLine(String.Format("C P[{0}{1}]    \n     :  P[{2}{3}] {4}mm/sec {5}    ;",
-                                                middle.m_num,
-                                                middle.formatForBracket(),
-                                                target.m_num,
-                                                target.formatForBracket(),
-                                                fast,
-                                                lissage));
+            GlobalMove('L', target.formatForBracket(), fast, smooth);
         }
 
 
-        private static string smoothFormat(int smooth)
+        public static void joint(Pos target, ushort fast, ushort smooth)
         {
-            // Vérification
-            if (smooth < 0)
-                throw new FormatException("Le lissage d'un mouvement doit être strictement supérieure à 0");
+            GlobalMove('J', target.formatForBracket(), fast, smooth);
+        }
 
+        public static void linear(PosReg target, ushort fast, ushort smooth)
+        {
+            GlobalMove('L', target.formatForBracket(), fast, smooth);
+        }
+
+
+        public static void joint(PosReg target, ushort fast, ushort smooth)
+        {
+            GlobalMove('J', target.formatForBracket(), fast, smooth);
+        }
+
+
+        public static void circular(Pos middle, Pos target, ushort fast, ushort smooth)
+        {
+
+            Generation.appendLine($"C {middle.formatForBracket()}    \n     :  {target.formatForBracket()} {fast}mm/sec {smoothFormat(smooth)}    ;");
+
+        }
+
+
+        private static string smoothFormat(ushort smooth)
+        {
             if (smooth == 0)
                 return "FINE";
             else

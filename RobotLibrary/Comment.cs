@@ -8,7 +8,8 @@ namespace RobotLibrary
         public static void comment(string comment)
         {
 
-            Comment.checkLenght(comment);
+            Utils.StringUtils.TextVerify(ref comment, Const.COMMENT_MAX_CHAR);
+            //Comment.checkLenght(comment);
 
             #if debug
             Console.WriteLine($"!{comment}");
@@ -18,16 +19,9 @@ namespace RobotLibrary
 
         }
 
-        private static void checkLenght(string s)
-        {
-            if (s.Length > 24)
-                throw new FormatException("La mongueur maximum pour un commentaire est de 24 caract�res.");
-        }
-
         public static string getFormatedComment(string brutComment)
         {
-            string comment = brutComment.Substring(brutComment.IndexOf('!') + 1).TrimStart(' ');
-            Comment.checkLenght(comment);
+            string comment = brutComment.Substring(brutComment.IndexOf('!') + 1).TrimStart(' ').TrimEnd();
 
             return "Comment.comment(\"" + comment + "\");";
         }
