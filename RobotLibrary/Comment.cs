@@ -19,12 +19,18 @@ namespace RobotLibrary
 
         }
 
-        public static string getFormatedComment(string brutComment)
+        /*public static string getFormatedComment(string brutComment)
         {
             string comment = brutComment.Substring(brutComment.IndexOf('!') + 1).TrimStart(' ').TrimEnd();
 
             return "Comment.comment(\"" + comment + "\");";
-        }
+        }*/
+
+        public static string ToString(string comment) {
+            return "Comment.comment(\"" + 
+            comment.Substring(comment.IndexOf('!') + 1).TrimStart(' ').TrimEnd() + 
+            "\");";
+        }   
 
     }
 }

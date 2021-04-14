@@ -53,5 +53,16 @@ namespace RobotLibrary.Global.InOut
             return "RO[" + _num + "]";
         }
 
+        public static implicit operator bool(RO RobotOut) => true;
+        public static implicit operator string(RO r) => string.Empty;
+
+        
+        /*
+        public static string operator +(Reg x, int xx) {
+            return x.ToString() + xx.ToString();
+        }
+
+        public static implicit operator Reg(string s) => new Reg(123);*/
+
     }
 }

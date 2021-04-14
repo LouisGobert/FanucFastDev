@@ -7,12 +7,11 @@ namespace RobotLibrary
     public class Pos
     {
 
-        private int[] coo;
-
-
         private bool _format;
         public string _desc { get; set; }
         public ushort _num { get; private set; }
+        public PosReg offset;
+
         public static List<Pos> PosList { get; private set; }
 
         public Uframe Uframe;
@@ -104,6 +103,13 @@ namespace RobotLibrary
                              "    W =     0.000 deg,  P =     0.000 deg,  R =     0.000 deg\n" +
                              "};\n";
         }
+
+
+        public Pos Offset(PosReg posReg) {
+            
+            offset = posReg;
+            return this;
+        } 
 
     }
 

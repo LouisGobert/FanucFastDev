@@ -10,8 +10,6 @@ namespace RobotLibrary.Global
         private int _num;
         private string _desc;
 
-
-        private int _value;
         public int Value;
 
         public string Desc {
@@ -67,7 +65,11 @@ namespace RobotLibrary.Global
             return "R[" + this._num + ((this._desc == string.Empty) ? string.Empty : ":" + this._desc) + "]" ;
         }
 
+        public static implicit operator int(Reg r) => 0;
+        
 
+        //public static int operator >(int x) =>  0;
+        //public static int operator <(int x) =>  0;
 
 /*
         public static string operator +(Reg x, int xx) {

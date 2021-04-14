@@ -27,19 +27,19 @@ using System.Threading.Tasks;
 ///         -   >= --> >=
 ///         
 /// </summary>
-namespace Compilator.Interpretor
+namespace Compilator.Interpretor.Maker
 {
 
     public class ConditionMaker
     {
-        private static char[] separator = { '&', '|', '(', ')', ' ', '=' };
+        private static char[] _separator = { '&', '|', '(', ')', ' ', '=', '>', '<' };
         private static StringBuilder conditionBuilder;
         private static int _bracketNumber;
         private static char _atIndex;
         private static string _line;
         private static int _lineIndex;
 
-        public static string make(ref int iFL, string[] fileLine)
+        public static string Make(ref int iFL, string[] fileLine)
         {
             // On obtient la condition pure --> "(x == 1)"
             _line = fileLine[iFL];
@@ -50,46 +50,20 @@ namespace Compilator.Interpretor
             _bracketNumber = 1;
 
 
-            /*while (_bracketNumber != 0)
-            {
-
-                for (_lineIndex = 0; _lineIndex < _line.Length; _lineIndex++)
-                {
-                    _atIndex = _line[_lineIndex];
-
-                    if (separator.Contains(_atIndex))
-                    {
-                        separatorAnalysis();
-                    }
-                    else if (!char.IsWhiteSpace(_atIndex))
-                    {
-                        wordAnalysis();
-                    }
-                }
-                if (_bracketNumber != 0)
-                {
-                    if (iFL + 1 >= fileLine.Length)
-                        throw new Exception("Fin de la condition non valide.");
-                    else
-                        _line = fileLine[++iFL];
-
-                }
-            }*/
-
             _lineIndex = 0;
             while (_bracketNumber != 0 && _lineIndex < _line.Length) 
             {
 
                 _atIndex = _line[_lineIndex];
 
-                if (separator.Contains(_atIndex))
+                if (_separator.Contains(_atIndex))
                     separatorAnalysis();
                 else if (!char.IsWhiteSpace(_atIndex))
                     wordAnalysis();
 
 
                 // If we are at the end of the line and the _bracketNumber != 0
-                if (_bracketNumber != 0) {}
+                //if (_bracketNumber != 0) {}
 
                 if (++_lineIndex >= _line.Length && _bracketNumber != 0) {
                     if (iFL + 1 >= fileLine.Length)
@@ -110,28 +84,34 @@ namespace Compilator.Interpretor
         private static void wordAnalysis()
         {
             string word = _line.Substring(_lineIndex);
-            int jumpIndex = word.IndexOfAny(separator);
+            int jumpIndex = word.IndexOfAny(_separator);
 
             // On récupré le mot en entier (jusqu'au prochain séparateur)
             if (jumpIndex != -1)
             {
-                word = word.Substring(0, word.IndexOfAny(separator));
+                word = word.Substring(0, word.IndexOfAny(_separator));
                 _lineIndex += jumpIndex-1;
             }
             else
-            {
                 throw new Exception("L'expression ne se termine pas par une parenthèse.");
-            }
 
 
             // On a récupéré le mot, maintenant on replace la ce qui se trouve après son . par
             // sa fonction adéquate on fonction de ce qui se trouve apès ce point.
 
             // Si le mot ne contient pas de point.
-            if (!word.Contains("."))
+            word = word.Trim();
+            if (word == "ON" || word == "OFF")
+                conditionBuilder.Append(word);
+            else if (!word.Contains("."))
             {
 
+                // Si il ne contient que des chiffres on l'ajoute directement
+                // sinon on lui rajoute un .toString
+                if (AllStringIsNumber(word))
                 conditionBuilder.Append(word);
+                else
+                    conditionBuilder.Append($"\" + {word}{".ToString()"} + \"");
 
             } else
             {
@@ -139,13 +119,27 @@ namespace Compilator.Interpretor
                 attibutAnalysis(word.Substring(word.IndexOf('.') + 1), ref word);
 
                 // MAJ du sb ajout des + "...." +
-                conditionBuilder.Append(String.Format("\" + {0} + \"", word));
+                conditionBuilder.Append($"\" + {word} + \"");
             }
 
 
+        }
 
+        /// <summary>
+        ///     Fonction qui vérifie que tout les char d'un string soient bien des nombres.
+        /// </summary>
+        /// <param name="str"> Le string à vérifier</param>
+        /// <returns> 
+        ///     True si toutes les lettres sont des chiffres.
+        ///     False sinon.
+        /// </returns>
+        private static bool AllStringIsNumber(string str) {
 
+            foreach (char ch in str)
+                if (!char.IsNumber(ch))
+                    return false;
 
+            return true;
         }
 
         /// <summary>
@@ -200,6 +194,20 @@ namespace Compilator.Interpretor
                     if (_line[_lineIndex+1] == '=')
                         _lineIndex++;
                     conditionBuilder.Append("=");
+                    break;
+                case '>':
+                    conditionBuilder.Append('>');
+                    if (_line[_lineIndex+1] == '=') {
+                        conditionBuilder.Append('=');
+                        _lineIndex++;
+                    }
+                    break;
+                case '<':
+                    conditionBuilder.Append('<');
+                    if (_line[_lineIndex+1] == '=') {
+                        conditionBuilder.Append('=');
+                        _lineIndex++;
+                    }
                     break;
                 default:
                     throw new NotImplementedException($" \" { _atIndex} \" n'est pas encore implémenté");

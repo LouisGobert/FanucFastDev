@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Text;
 
-namespace Compilator.Interpretor {
+namespace Compilator.Interpretor.Maker {
 
     public class ForMaker {
 
@@ -30,9 +30,9 @@ namespace Compilator.Interpretor {
             Interpreter.addLine($"Generation.appendLine(\"{forBuilder}\");");
 
             // Maintenant on s'ocupe des { }
-            int bracketIndex = Interpreter.toOpenBracket(iFL);
+            int bracketIndex = Utils.ToOpenBracket(iFL, fileLine);
             fileLine[bracketIndex] = fileLine[bracketIndex].Replace('{', ' ');
-            bracketIndex = Interpreter.getIndexEndBlock(bracketIndex);
+            bracketIndex = Utils.GetIndexEndBlock(bracketIndex, fileLine);
             fileLine[bracketIndex] = "Generation.appendLine(\"  ENDFOR ;\");";
 
         }

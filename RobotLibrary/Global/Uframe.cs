@@ -1,46 +1,50 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using RobotLibrary.Utils;
 
 namespace RobotLibrary.Global
 {
     public class Uframe
     {
 
-        private int frameNumber;
+        private int _num;
 
-        public static int actualFrame;
-        private string frameDescription;
-        private static List<int> frameList = new List<int>();
+        private string _desc;
+        public string Desc {
 
-        public Uframe(int number, string description)
+            get => _desc;
+            set {
+                // On vérifie la description
+                StringUtils.TextVerify(ref value, Const.UFRAME_MAX_CHAR);
+
+                _desc = value;
+            }
+        }
+   
+
+        public Uframe(int num)
         {
-
-            if (frameList.Contains(number))
-                throw new AccessViolationException("Numéro de Uframe déjà existant.");
-
-            frameList.Add(number);
-
-            frameNumber = number;
-            frameDescription = description;
-
-            #if debug
-            Console.WriteLine($"Nouveau frame : [{frameNumber}] - \"{frameDescription}\"");
-            #endif
+            _num = num;
         }
 
-        public static void set(Uframe frame)
+        public static void Set(Uframe frame)
         {
-            actualFrame = frame.frameNumber;
+            Generation.appendLine(String.Format("  UFRAME_NUM={0} ;", frame._num));
 
-            #if debug
-            Console.WriteLine($"Changement de Uframe : [{frame.frameNumber}] - \"{frame.frameDescription}\"");
-            #endif
+        }
 
-            Generation.appendLine(String.Format("  UFRAME_NUM={0} ;", actualFrame));
+        public static string SetMake(string line) {
+            line = line.Substring(line.IndexOf('=') + 1);
+            return $"Uframe.Set({line.Substring(0, line.IndexOf(';'))});";
+        }
 
+
+        public static Uframe[] Init() {
+
+            Uframe[] uList = new Uframe[Const.MAX_UFRAME + 1];
+            for (int i = 0; i < Const.MAX_UFRAME; i++)
+                uList[i] = new Uframe(i);
+
+            return uList;
         }
 
     }

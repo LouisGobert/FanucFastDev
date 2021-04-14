@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using Compilator.Files;
-using Compilator.Files;
-
 
 namespace Compilator
 {
@@ -12,10 +10,10 @@ namespace Compilator
 
         public enum ExitCode : int
         {
-            Cancel = 0,
-            Succes = 1,
-            ErrorArgs = -1,
-            ErrorNotFound = -2
+            Cancel = 0,         /// Annulation
+            Succes = 1,         /// Succès
+            ErrorArgs = -1,     /// Argument invalide
+            ErrorNotFound = -2  /// Fichier introubale
         }
 
         static int Main(string[] args)
@@ -31,53 +29,19 @@ namespace Compilator
                 return FileGestion.NewTemplate(args);
             else if (args[0] == "-b" || args[0] == "build")
                 return BuildTemplate(args);
-
-
-
-            /*
-            List<string> arguments = new List<string>(args);
-
-            if (arguments.Count == 0) {
-                Console.WriteLine("Argument manquant.");
-                usagePrint();
-
-                return -1;
-            } else if (arguments.Count == 2) {
-
-                // Si programme par défault
-                if (arguments.Contains("-c") || arguments.Contains("--cs")) {
-                    Const.CS_PATH = Files.Const.DEFAULT_CS_PATH;
-                } else {
-                    if (File.Exists(args[0]))
-                        Const.CS_PATH = args[0];
-                    else {
-                        Console.WriteLine("Le chemin vers le fichier .cs n'est pas valide/n'existe pas.\n");
-                        return -1;
-                    }
-                }
-
-                if (arguments.Contains("-b") || arguments.Contains("--build")) {
-                    Const.BUILD_PATH = Files.Const.DEFAULT_BUILD_PATH;
-                } else {
-                    if (Directory.Exists(args[1]))
-                        Const.BUILD_PATH = args[1];
-                    else {
-                        Console.WriteLine("Le chemin du dossier de destination n'est pas valide/n'existe pas.\n");
-                        return -1;
-                    }
-                }
-
-                
-                // Début de la compilation
-                Console.WriteLine("Début de la génération...");
-                Compilation.startCompilation(); // true pour garder les lignes vides
-                
-            }*/
+            else if (args[0] == "-o" || args[0] == "open")
+                return OpenCode(args);
 
             PrintUsage();
             return (int)ExitCode.ErrorArgs;
         }
 
+        /// <summary>
+        ///     Fonction qui va initier la génération des fichiers .ls et qui va
+        ///     configuré les constantes de path de builds.
+        /// </summary>
+        /// <param name="args"> La listes des arguments fourni par l'utilisateur </param>
+        /// <returns></returns>
         private static int BuildTemplate(string[] args) {
 
             // Folder path by default, not implemented
@@ -93,7 +57,7 @@ namespace Compilator
 
                 Const.CS_NAME = buildName;
                 Console.WriteLine("Début de la génération...");
-                Compilation.startCompilation();
+                Compilation.Start();
                 return (int)ExitCode.Succes;
             } 
             else 
@@ -103,20 +67,40 @@ namespace Compilator
             }
         }
 
-        
+        /// <summary>
+        ///     Permet d'ouvir un programme passé en argument dans VS Code.
+        /// </summary>
+        /// <param name="args"> La listes des arguments fourni par l'utilisateur </param>
+        /// <returns> ExitStatus </returns>
+        private static int OpenCode(string[] args) {
 
+            string codeName = (Path.GetExtension(args[1]) == string.Empty) ? args[1] + ".cs" : args[1];
+            string codePath = Path.Combine(Const.DEFAULT_CS_PATH, codeName);
 
+            if (!File.Exists(codePath)) {
+                Console.WriteLine($"Fichier : \n{codeName}\" introuvable.");
+                return (int)ExitCode.ErrorNotFound;
+            }
 
+            Process.Start("code", codePath);
+            return (int)ExitCode.Succes;
+        }
+
+        /// <summary>
+        ///     Fonction qui affiche dans la console les différent parramètre
+        ///     et fonction de l'application.
+        /// </summary>
         private static void PrintUsage() {
-            Console.WriteLine(  "Usage:  \n" +
+            Console.WriteLine("Usage:  \n" +
                     "  ./Compilator [ACTION] [FILE NAME]\n\n" +
-                    "Application Actions:\n" +
+                    "Actions:\n" +
                     "  -n ,  new         Créer une nouvelle template .cs\n" +
-                    "  -b ,  build       Dossier de stockage par défaut\n");
+                    "  -b ,  build       Build un programme .cs\n" +
+                    "  -o ,  open        Ouvrir une programme .cs\n" +
+                    "\n" +
+                    "File Name:\n" +
+                    "  Le nom du fichier à créer/build/ouvrir");
         }
 
     }
 }
-
-
-// dotnet run --project ShowCase/ShowCase.csproj

@@ -4,6 +4,7 @@ using RobotLibrary;
 using RobotLibrary.Global;
 using RobotLibrary.Global.InOut;
 using RobotLibrary.Utils;
+using static RobotLibrary.Other;
 
 class forTest {
 
@@ -22,7 +23,6 @@ class forTest {
     private const string ON_FM = "ONFM";
     private const string OFF = "OFF";
     private const string OFF_FD = "OFFFD";
-    private static bool PASS;
 
 
     #endregion
@@ -46,8 +46,22 @@ class forTest {
 
     static void T_EXEMPLE()
     {
-
         ProgramInfo.keepBlankLine = true;
+
+        Run("test");
+        //! bonjout
+        if (RO[12] == OFF) {
+            Print("pas bonjour");
+        } 
+        else 
+        {
+            Print("oui");
+        }
+
+        if (Reg[12] > 123) {
+            Print("yes");
+        }
+
         Pos pTest = new Pos(1, "Point de test");
         Pos pInter = new Pos(2);
         PosReg pAPproche = PosReg[12];
@@ -61,70 +75,25 @@ class forTest {
 
         valeurMax.Set(valMin);
 
+        valeurMax.Value = valMin.Value;
+
         Reg i = Reg[53];
-        for (i.Value = 0; i.Value < valeurMax.Value; i.Value++) {
-            print("test");
+        for (i.Value = 0; i.Value < valeurMax.Value; i.Value--) {
+            Print("test");
         }
 
+        goto test;
+        test:
 
 
-        move.linear(pAPproche, 100, 100);
+        Move.Linear(pInter.Offset(PosReg[8]), 100, 100);
 
-        move.joint(pTest, 100, 100);
-        move.linear(pTest, 50, 0);
+        Move.Linear(pTest, 50, 0);
         
 
-        move.circular(pInter, pTest, 23, 0);
+        Move.Circular(pInter, pTest, 23, 0);
 
     }
-
-    public static bool For(Reg tes) {
-        return true;
-    }
-
-
-
-    #region
-
-    static void print(string toPrint)
-    {
-        #if debug
-        Console.WriteLine(toPrint);
-        #endif
-
-        StringUtils.TextVerify(ref toPrint, Const.PRINT_MAX_CHAR);
-
-        Generation.appendLine(string.Format("  MESSAGE[{0}]  ;", toPrint));
-    }
-
-    static void wait(double sec)
-    {
-        if (sec <= 0)
-            throw new FormatException("Le temps doit être supérieure à 0.");
-
-
-
-        NumberFormatInfo nfi = CultureInfo.CreateSpecificCulture(CultureInfo.CurrentCulture.Name).NumberFormat;
-
-        nfi.NumberDecimalSeparator = ".";
-
-
-        Generation.appendLine(String.Format("  WAIT{0, 7}(sec) ;", sec.ToString(".00", nfi)));
-    }
-
-    static void wait(bool condition)
-    {
-
-    }
-
-    static void run(string s) {
-        Generation.appendLine($"  RUN {s} ;");
-    }
-
-
-
-
-#endregion
 
 }
 

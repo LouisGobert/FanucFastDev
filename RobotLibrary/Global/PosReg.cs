@@ -12,6 +12,7 @@ namespace RobotLibrary.Global
     {
 
         private int _num;
+        public PosReg offset;
 
         private string _desc;
         public string Desc {
@@ -58,16 +59,11 @@ namespace RobotLibrary.Global
 
         public override string ToString()
         {
-            string s = "PR[" + _num;
-            if (Desc != string.Empty)
-                s += ":" + _desc;
-
-            return s + "]";
-
+            return "PR[" + this._num + ((this._desc == string.Empty) ? string.Empty : ":" + this._desc) + "]" ;
         }
 
 
-        public static void preCompile(string s)
+        public static void PosRegMake(string s)
         {
             if (s.Contains(".State"))
             {
@@ -77,9 +73,17 @@ namespace RobotLibrary.Global
         }
 
 
-        public string formatForBracket()
+        /*public string formatForBracket()
         {
             return "PR[" + this._num + ((this._desc == string.Empty) ? string.Empty : ":" + this._desc) + "]" ;
+        }*/
+
+        public PosReg Offset(PosReg posReg) {
+            offset = posReg;
+            return this;
         }
+
+
+        
     }
 }

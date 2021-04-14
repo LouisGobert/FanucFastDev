@@ -1,19 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Compilator.Files
 {
     class FileGestion
     {
-        
-    
 
-
-        public static string[] getFileLine(string path) {
+        public static string[] GetFileLine(string path) {
 
             string[] fileLine = null;
 
@@ -25,7 +18,6 @@ namespace Compilator.Files
             }
 
             return fileLine;
-
         }
 
 
@@ -62,7 +54,7 @@ namespace Compilator.Files
             /// Changement de sa fonction d'entré (Main)
             /// Enregistrement dans newTemplatesPath
 
-            string[] templateLines = getFileLine(Const.CS_TEMPLATE_PATH);
+            string[] templateLines = GetFileLine(Const.CS_TEMPLATE_PATH);
 
             string line;
             for (int i = 0; i < templateLines.Length; i++) {
@@ -100,6 +92,5 @@ namespace Compilator.Files
             return (int)Program.ExitCode.Succes;
 
         }
-
     }
 }

@@ -1,5 +1,5 @@
 using System;
-using System.Collections.Generic;
+using RobotLibrary.Utils;
 
 namespace RobotLibrary.Global
 {
@@ -8,35 +8,47 @@ namespace RobotLibrary.Global
     public class Utool
     {
 
-        private int _toolNumber;
-        private string _toolDescription;
-        private static List<int> toolList = new List<int>();
+        private int _num;
+                private string _desc;
+        public string Desc {
 
-        public Utool(int number, string description) {
+            get => _desc;
+            set {
+                // On vérifie la description
+                StringUtils.TextVerify(ref value, Const.UTOOL_MAX_CHAR);
 
-            if (toolList.Contains(number)) {
-                throw new AccessViolationException("Numéro de Utool déjà existant.");
+                _desc = value;
             }
-
-            toolList.Add(number);
-
-            _toolNumber = number;
-            _toolDescription = description;
-
-            #if debug
-            Console.WriteLine($"Nouveau tool : [{_toolNumber}] - \"{_toolDescription}\"");
-            #endif
         }
 
-        public static void set(Utool tool) {
 
-            #if debug
-            Console.WriteLine($"Changement de Utool : [{tool._toolNumber}] - \"{tool._toolDescription}\"");
-            #endif
-
-
-            Generation.appendLine(String.Format("  UTOOL_NUM={0} ;", tool._toolNumber));
+        public Utool(int num) {
+            _num = num;
         }
+
+        public static Utool[] Init() {
+
+            Utool[] uList = new Utool[Const.MAX_UTOOL + 1];
+            for (int i = 0; i < Const.MAX_UTOOL; i++)
+                uList[i] = new Utool(i);
+
+            return uList;
+        }
+
+        public static void Set(Utool tool) {
+
+            Generation.appendLine(String.Format("  UTOOL_NUM={0} ;", tool._num));
+        }
+
+        public static string SetMake(string line) {
+            line = line.Substring(line.IndexOf('=') + 1);
+            return $"Utool.Set({line.Substring(0, line.IndexOf(';'))});";
+        }
+
+
+        public static implicit operator int(Utool utool) => 0;
+        public static implicit operator Utool(int x) => Const.UserTool[x];
+        //public static implicit operator int(Reg r) => 0;
 
         
     }
