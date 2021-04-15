@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace RobotLibrary
 {
-    public class Generation
+    public static class Generation
     {
         //public static string generatePath; // Le chemin du fichier .LS en cours de modification
 
@@ -57,7 +57,7 @@ namespace RobotLibrary
         {
 
             // Supression des point déjà existant
-            Pos.deleteAllPos();
+            Pos.DeleteAllPos();
             _BUILD_PATH = Path.Combine(BUILD_PATH, programName.ToUpper() + ".LS");
             _indexLsLine = 1;
             progInstru = string.Empty;

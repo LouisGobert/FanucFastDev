@@ -10,12 +10,12 @@ namespace RobotLibrary
         private bool _format;
         public string _desc { get; set; }
         public ushort _num { get; private set; }
-        public PosReg offset;
+        public PosReg PROffset;
 
         public static List<Pos> PosList { get; private set; }
 
-        public Uframe Uframe;
-        public Utool Utool;
+        //public Uframe Uframe;
+        //public Utool Utool;
 
         public Pos(ushort num)
         {
@@ -44,7 +44,7 @@ namespace RobotLibrary
         }
 
 
-        public static void deleteAllPos()
+        public static void DeleteAllPos()
         {
             PosList = new List<Pos>();
         }
@@ -107,7 +107,7 @@ namespace RobotLibrary
 
         public Pos Offset(PosReg posReg) {
             
-            offset = posReg;
+            PROffset = posReg;
             return this;
         } 
 

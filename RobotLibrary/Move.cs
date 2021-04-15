@@ -9,9 +9,9 @@ namespace RobotLibrary
         private static void GlobalMove(char moveType, Pos target, ushort fast, ushort smooth) {
 
             string formatedOffset = string.Empty;
-            if (target.offset != null) {
-                formatedOffset = " Offset," + target.offset.ToString();
-                target.offset = null;
+            if (target != null) {
+                formatedOffset = " Offset," + target.PROffset.ToString();
+                target.PROffset = null;
             }
 
             Generation.appendLine(
@@ -22,8 +22,8 @@ namespace RobotLibrary
         private static void GlobalMove(char moveType, PosReg target, ushort fast, ushort smooth) {
 
             string formatedOffset = string.Empty;
-            if (target.offset != null) {
-                formatedOffset = " Offset," + target.offset.ToString();
+            if (target.PROffset != null) {
+                formatedOffset = " Offset," + target.PROffset.ToString();
             }
 
             Generation.appendLine(

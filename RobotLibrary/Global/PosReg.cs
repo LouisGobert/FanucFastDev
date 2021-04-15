@@ -12,7 +12,7 @@ namespace RobotLibrary.Global
     {
 
         private int _num;
-        public PosReg offset;
+        public PosReg PROffset;
 
         private string _desc;
         public string Desc {
@@ -79,7 +79,7 @@ namespace RobotLibrary.Global
         }*/
 
         public PosReg Offset(PosReg posReg) {
-            offset = posReg;
+            PROffset = posReg;
             return this;
         }
 
