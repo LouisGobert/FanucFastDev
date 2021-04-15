@@ -3,10 +3,12 @@ using System.Globalization;
 using RobotLibrary.Utils;
 using RobotLibrary.Global;
 
-namespace RobotLibrary {
+namespace RobotLibrary.Command
+{
 
     public class Other
     {
+
         public static void Print(string toPrint)
         {
             #if debug

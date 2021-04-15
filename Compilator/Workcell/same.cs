@@ -4,8 +4,11 @@ using RobotLibrary;
 using RobotLibrary.Global;
 using RobotLibrary.Global.InOut;
 using RobotLibrary.Utils;
-using static RobotLibrary.Other;
-using static RobotLibrary.Const;
+using RobotLibrary.Local;
+using RobotLibrary.Command;
+using static RobotLibrary.Command.Other;
+using static RobotLibrary.Global.Const;
+
 
 class same {
 
@@ -29,7 +32,7 @@ class same {
     
     static void T2_DEP_2()
     {
-        ProgramInfo.groupMask = "1,*,*,*,*";
+        ProgramInfo.GroupMask = "1,*,*,*,*";
         //! Dépot pièce
 
         UFRAME_NUM = planCarton;

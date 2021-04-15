@@ -1,14 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using RobotLibrary.Global;
 
 namespace RobotLibrary.Utils
 {
     public class StringUtils
     {
-        private static char[] accent = { 'é', 'è', 'ê', 'â', 'û', 'î' };
+        
 
         public static void TextVerify(ref string s, int maxLength)
         {
@@ -26,7 +24,7 @@ namespace RobotLibrary.Utils
 
             for (int i = 0; i < s.Length; i++)
             {
-                if (accent.Contains(s[i]))
+                if (Const.ACCENT.Contains(s[i]))
                 {
                     Console.Write(  $"La phrase : \"{s}\" ne peux pas contenir des accents.\n" +
                                          $"Veuillez introduire une nouvelle phrase : ");

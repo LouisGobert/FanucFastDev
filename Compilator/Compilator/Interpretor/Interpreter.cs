@@ -8,6 +8,7 @@ using Compilator.Files;
 using RobotLibrary;
 using Compilator.Interpretor.Maker;
 using RobotLibrary.Global;
+using RobotLibrary.Command;
 
 
 namespace Compilator.Interpretor

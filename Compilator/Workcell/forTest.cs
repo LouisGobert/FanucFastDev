@@ -5,6 +5,8 @@ using RobotLibrary.Global;
 using RobotLibrary.Global.InOut;
 using RobotLibrary.Utils;
 using static RobotLibrary.Other;
+using RobotLibrary.Command;
+using RobotLibrary.Local;
 
 class forTest {
 
@@ -46,7 +48,7 @@ class forTest {
 
     static void T_EXEMPLE()
     {
-        ProgramInfo.keepBlankLine = true;
+        ProgramInfo.KeepBlankLine = true;
 
         Run("test");
         //! bonjout

@@ -2,7 +2,7 @@
 using RobotLibrary.Global;
 
 
-namespace RobotLibrary
+namespace RobotLibrary.Global
 {
     public static class Const
     {
@@ -49,6 +49,12 @@ namespace RobotLibrary
 
         public static readonly Utool[] UserTool = Utool.Init();
         public static Utool UTOOL_NUM = UserTool[0]; // Pas en readonly car on utilise UTOOL_NUM = x
+
+
+        
+        ///     Liste des lettres qui ne peuvent pas appaitre dans un commentaire
+        ///     ou être affiché a l'écran ...
+        public static readonly char[] ACCENT = { 'é', 'è', 'ê', 'â', 'û', 'î' };
 
 
     }

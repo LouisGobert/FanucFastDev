@@ -1,12 +1,11 @@
 ﻿//#define debug
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using RobotLibrary.Local;
+using RobotLibrary.Command;
 
-namespace RobotLibrary
+namespace RobotLibrary.Global
 {
     public static class Generation
     {
@@ -24,10 +23,10 @@ namespace RobotLibrary
         public static string setupInfo()
         {
 
-            string progInfo =    $"/PROG  {ProgramInfo.name}\n" 
+            string progInfo =    $"/PROG  {ProgramInfo.Name}\n" 
                                 + "/ATTR\n"
                                 + "OWNER       = MNEDITOR;\n"
-                                + $"COMMENT     = \"{ProgramInfo.desc}\";\n"
+                                + $"COMMENT     = \"{ProgramInfo.Desc}\";\n"
                                 + "PROG_SIZE   = 1382;\n"
                                 + "CREATE      = DATE 20-10-15  TIME 15:42:30;\n"
                                 + "MODIFIED    = DATE 20-10-15  TIME 16:10:46;\n"
@@ -42,7 +41,7 @@ namespace RobotLibrary
                                 + "      BUSY_LAMP_OFF     = 0,\n"
                                 + "      ABORT_REQUEST     = 0,\n"
                                 + "      PAUSE_REQUEST     = 0;\n"
-                                + $"DEFAULT_GROUP   = {ProgramInfo.groupMask};\n"
+                                + $"DEFAULT_GROUP   = {ProgramInfo.GroupMask};\n"
                                 + "CONTROL_CODE    = 00000000 00000000;\n"
                                 + "/APPL\n"
                                 + "/MN\n";
@@ -61,9 +60,9 @@ namespace RobotLibrary
             _BUILD_PATH = Path.Combine(BUILD_PATH, programName.ToUpper() + ".LS");
             _indexLsLine = 1;
             progInstru = string.Empty;
-            ProgramInfo.setDefault();
+            ProgramInfo.Reset();
 
-            ProgramInfo.name = programName;
+            ProgramInfo.Name = programName;
         }
 
         public static void appendLine(string line)
@@ -73,7 +72,7 @@ namespace RobotLibrary
 
         public static void appendXBlankLine(int x)
         {
-            if (ProgramInfo.keepBlankLine)
+            if (ProgramInfo.KeepBlankLine)
                 for (int i = 0; i < x; i++)
                     appendLine("   ;");
                     

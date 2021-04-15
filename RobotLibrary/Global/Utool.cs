@@ -3,8 +3,6 @@ using RobotLibrary.Utils;
 
 namespace RobotLibrary.Global
 {
-
-
     public class Utool
     {
 

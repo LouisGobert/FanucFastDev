@@ -1,5 +1,5 @@
 using System;
-using static RobotLibrary.Const;
+using static RobotLibrary.Global.Const;
 
 namespace RobotLibrary.Global.InOut
 {

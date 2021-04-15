@@ -1,8 +1,7 @@
-using System;
 using RobotLibrary.Global;
 
 
-namespace RobotLibrary
+namespace RobotLibrary.Command
 {
     public class Move
     {

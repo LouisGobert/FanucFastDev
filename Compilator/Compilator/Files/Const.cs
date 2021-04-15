@@ -8,15 +8,15 @@ using System.Reflection;
 
 namespace Compilator.Files
 {
-    class Const
+    public static class Const
     {
         /// Le chemin actuel (ou l'application se trouve).
-        private static string ACTUAL_PATH = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
+        private static readonly string ACTUAL_PATH = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
 
         /// Les chemins vers RobotLibrary.dll et vers un lieu tempon qui servira a stocké
         /// le .dll compilé, c'est lui qui générera en tant que tel le fichier .ls
-        public static string ROBOT_LIBRARY_DLL_PATH = Path.Combine(ACTUAL_PATH, "../../../../RobotLibrary/obj/Debug/net5.0/RobotLibrary.dll");
-        public static string TMP_DLL_PATH =  Path.Combine(Path.GetTempPath(), "tmpGeneration.dll");
+        public static readonly string ROBOT_LIBRARY_DLL_PATH = Path.Combine(ACTUAL_PATH, "../../../../RobotLibrary/obj/Debug/net5.0/RobotLibrary.dll");
+        public static readonly string TMP_DLL_PATH =  Path.Combine(Path.GetTempPath(), "tmpGeneration.dll");
 
         /// Le chemin que l'on va définir au début du programme et qui pointera vers 
         /// le programme .cs à compiler ainsi que son Path par défaut.

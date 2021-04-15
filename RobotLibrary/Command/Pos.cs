@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using RobotLibrary.Global;
 
-namespace RobotLibrary
+namespace RobotLibrary.Command
 {
 
     public class Pos

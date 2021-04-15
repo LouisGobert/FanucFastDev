@@ -20,7 +20,7 @@ DEFAULT_GROUP   = 1,*,*,*,*;
 CONTROL_CODE    = 00000000 00000000;
 /APPL
 /MN
-   1:  !fg ;
+   1:  !g ;
    2:   ;
    3:  UFRAME_NUM=1 ;
    4:  UTOOL_NUM=3 ;
@@ -28,7 +28,7 @@ CONTROL_CODE    = 00000000 00000000;
    6:   ;
    7:J PR[41] 100% CNT50    ;
    8:   ;
-   9:  !f ;
+   9:  !g ;
   10:  R[51]=R[53]    ;
   11:   ;
   12:J PR[21:depot-calc] 100% CNT2    ;
