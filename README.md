@@ -10,6 +10,7 @@ Application console pour Linux qui permet de dévellopé des applications .LS pu
 
 #### A implémenter
 
+* Ajouter les UnitTests
 * Gestion de memory size dans les paramètres du fichier .ls
 * Gestion du type de programme dans les paramètres du fichier ls
 * Charger toutes les contantes depuis un fichier .json

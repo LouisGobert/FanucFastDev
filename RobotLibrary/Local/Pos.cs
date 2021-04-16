@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using RobotLibrary.Global;
 
-namespace RobotLibrary.Command
+namespace RobotLibrary.Local
 {
 
     public class Pos
@@ -10,7 +10,7 @@ namespace RobotLibrary.Command
         private bool _format;
         public string _desc { get; set; }
         public ushort _num { get; private set; }
-        public PosReg PROffset;
+        public PosReg PROffset { get; set; }
 
         public static List<Pos> PosList { get; private set; }
 

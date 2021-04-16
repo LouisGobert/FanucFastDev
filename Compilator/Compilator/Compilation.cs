@@ -1,12 +1,12 @@
 ﻿using System;
 using System.IO;
 using Compilator.Interpretor;
-using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.Emit;
 using System.Reflection;
 using System.Linq;
 using System.Runtime.Loader;
-using Microsoft.CodeAnalysis.Emit;
 
 
 namespace Compilator
