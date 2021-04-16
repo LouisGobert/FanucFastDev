@@ -70,7 +70,7 @@ namespace Compilator.Interpretor {
         public static int ToOpenBracket(int indexStart, string[] fileLine)
         {
             string s = fileLine[indexStart];
-            while (indexStart + 1 < fileLine.Length && s.Trim().Length == 0 && !s.Contains("{"))
+            while (indexStart + 1 < fileLine.Length && !s.Contains("{"))
                 s = fileLine[++indexStart];
 
             if (!s.Contains('{'))

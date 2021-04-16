@@ -7,7 +7,7 @@ CREATE      = DATE 20-10-15  TIME 15:42:30;
 MODIFIED    = DATE 20-10-15  TIME 16:10:46;
 FILE_NAME   = ;
 VERSION     = 0;
-LINE_COUNT  = 17;
+LINE_COUNT  = 25;
 MEMORY_SIZE = 1662;
 PROTECT     = READ_WRITE;
 TCD:  STACK_SIZE        = 0,
@@ -20,22 +20,30 @@ DEFAULT_GROUP   = 1,*,*,*,*;
 CONTROL_CODE    = 00000000 00000000;
 /APPL
 /MN
-   1:  !g ;
+   1:  !louis ;
    2:   ;
    3:  UFRAME_NUM=1 ;
    4:  UTOOL_NUM=3 ;
    5:   ;
-   6:   ;
-   7:J PR[41] 100% CNT50    ;
-   8:   ;
-   9:  !g ;
-  10:  R[51]=R[53]    ;
+   6:  IF (RO[1]) THEN ;
+   7:   ;
+   8:  ENDIF ;
+   9:   ;
+  10:  IF (RO[12] AND RO[11]) THEN ;
   11:   ;
-  12:J PR[21:depot-calc] 100% CNT2    ;
-  13:L PR[21:depot-calc] 100mm/sec FINE Offset,PR[50:Hauteur approche]    ;
-  14:  CALL M2_OUVERTURE_PINCE    ;
-  15:L PR[21:depot-calc] 100mm/sec FINE Offset,PR[50:Hauteur approche]    ;
+  12:  ENDIF ;
+  13:   ;
+  14:   ;
+  15:J PR[41] 100% CNT50    ;
   16:   ;
-  17:   ;
+  17:  !louis ;
+  18:  R[51]=R[53]    ;
+  19:   ;
+  20:J PR[21:depot-calc] 100% CNT2    ;
+  21:L PR[21:depot-calc] 100mm/sec FINE Offset,PR[50:Hauteur approche]    ;
+  22:  CALL M2_OUVERTURE_PINCE    ;
+  23:L PR[21:depot-calc] 100mm/sec FINE Offset,PR[50:Hauteur approche]    ;
+  24:   ;
+  25:   ;
 /POS
 /END

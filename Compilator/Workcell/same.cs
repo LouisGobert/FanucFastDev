@@ -38,6 +38,16 @@ class same {
         UFRAME_NUM = planCarton;
         UTOOL_NUM = 3;
 
+        if (RO[1]) 
+        {
+
+        }
+
+        if (RO[12] 
+        && RO[11]) {
+
+        }
+
 
         Move.Joint(PR[41], 100, 50);
 

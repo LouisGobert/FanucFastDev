@@ -6,9 +6,12 @@ using RobotLibrary.Global;
 namespace RobotLibrary.Command
 {
 
-    public class Other
+    public static class Other
     {
-
+        /// <summary>
+        ///     Permet d'afficher un écran sur le Teach Pendant.
+        /// </summary>
+        /// <param name="toPrint"> Le message à afficher </param>
         public static void Print(string toPrint)
         {
             #if debug
@@ -20,6 +23,10 @@ namespace RobotLibrary.Command
             Generation.appendLine(string.Format("  MESSAGE[{0}]  ;", toPrint));
         }
 
+        /// <summary>
+        ///     Permet d'attendre un certain nombre de seconde.
+        /// </summary>
+        /// <param name="sec"> Le nombre de seconde à attendre</param>
         public static void Wait(double sec)
         {
             if (sec <= 0)

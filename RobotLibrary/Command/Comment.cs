@@ -4,7 +4,7 @@ using RobotLibrary.Global;
 namespace RobotLibrary.Command
 {
 
-    public class Comment
+    public static class Comment
     {
         public static void comment(string comment)
         {

@@ -1,4 +1,4 @@
-﻿//#define debug
+﻿#define debug
 
 using System;
 using System.Collections.Generic;
@@ -125,7 +125,7 @@ namespace Compilator.Interpretor
                     JumpMaker.LabelMaker(line);    
                 // For               
                 else if (line.StartsWith("for"))
-                    ForMaker.Make(iFL, ref fileLine);
+                    ForMaker.Make(iFL, fileLine);
                 else if (line.StartsWith("UFRAME_NUM"))
                     addLine(Uframe.SetMake(line));
                 else if (line.StartsWith("UTOOL_NUM"))

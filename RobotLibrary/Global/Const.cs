@@ -33,7 +33,7 @@ namespace RobotLibrary.Global
         public static readonly ushort MACRO = 1;
 
 
-        public static readonly RO[] RO = RobotLibrary.Global.InOut.RO.Init();
+        public static readonly Rout[] RO = RobotLibrary.Global.InOut.Rout.Init();
         public static readonly Flag[]   Flag = RobotLibrary.Global.InOut.Flag.Init();
         public static readonly PosReg[] PR = RobotLibrary.Global.PosReg.Init();
         public static readonly Reg[] R = RobotLibrary.Global.Reg.Init();

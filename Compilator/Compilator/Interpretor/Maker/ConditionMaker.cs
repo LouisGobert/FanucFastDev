@@ -30,7 +30,7 @@ using System.Threading.Tasks;
 namespace Compilator.Interpretor.Maker
 {
 
-    public class ConditionMaker
+    public static class ConditionMaker
     {
         private static char[] _separator = { '&', '|', '(', ')', ' ', '=', '>', '<' };
         private static StringBuilder conditionBuilder;
@@ -63,14 +63,14 @@ namespace Compilator.Interpretor.Maker
 
 
                 // If we are at the end of the line and the _bracketNumber != 0
-                //if (_bracketNumber != 0) {}
-
                 if (++_lineIndex >= _line.Length && _bracketNumber != 0) {
                     if (iFL + 1 >= fileLine.Length)
                         throw new Exception("Fin de la condition non valide.");
                     else {
                         _lineIndex = 0;
-                        _line = fileLine[++iFL];
+                        _line = fileLine[++iFL].Trim();
+
+                        fileLine[iFL] = (_line.Contains('{')) ? "{" : "PASS";
                     }
                 }
                 

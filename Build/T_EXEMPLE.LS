@@ -7,7 +7,7 @@ CREATE      = DATE 20-10-15  TIME 15:42:30;
 MODIFIED    = DATE 20-10-15  TIME 16:10:46;
 FILE_NAME   = ;
 VERSION     = 0;
-LINE_COUNT  = 35;
+LINE_COUNT  = 37;
 MEMORY_SIZE = 1662;
 PROTECT     = READ_WRITE;
 TCD:  STACK_SIZE        = 0,
@@ -22,40 +22,42 @@ CONTROL_CODE    = 00000000 00000000;
 /MN
    1:   ;
    2:  RUN test ;
-   3:  !bonjout ;
-   4:  IF (RO[12]=OFF) THEN ;
-   5:  MESSAGE[pas bonjour]  ;
-   6:  ELSE  ;
-   7:  MESSAGE[oui]  ;
-   8:  ENDIF ;
-   9:   ;
-  10:  IF (R[12]>123) THEN ;
-  11:  MESSAGE[yes]  ;
-  12:  ENDIF ;
-  13:   ;
-  14:   ;
+   3:   ;
+   4:  RO[1]=OFF ;
+   5:  !bonjout ;
+   6:  IF (RO[12]=OFF) THEN ;
+   7:  MESSAGE[pas bonjour]  ;
+   8:  ELSE  ;
+   9:  MESSAGE[oui]  ;
+  10:  ENDIF ;
+  11:   ;
+  12:  IF (R[12]>123) THEN ;
+  13:  MESSAGE[yes]  ;
+  14:  ENDIF ;
   15:   ;
   16:   ;
   17:   ;
-  18:  R[69:Valeur maximu]=R[1:valeur min]    ;
+  18:   ;
   19:   ;
-  20:   ;
-  21:  FOR R[53]=0 DOWN TO R[69:Valeur maximu] ;
-  22:  MESSAGE[test]  ;
-  23:  ENDFOR ;
-  24:   ;
-  25:  JMP LBL[1] ;
-  26:  LBL[1:test] ;
-  27:   ;
-  28:   ;
-  29:L P[2] 100mm/sec CNT100 Offset,PR[8]    ;
+  20:  R[69:Valeur maximu]=R[1:valeur min]    ;
+  21:   ;
+  22:   ;
+  23:  FOR R[53]=0 DOWN TO R[69:Valeur maximu] ;
+  24:  MESSAGE[test]  ;
+  25:  ENDFOR ;
+  26:   ;
+  27:  JMP LBL[1] ;
+  28:  LBL[1:test] ;
+  29:   ;
   30:   ;
-  31:L P[1:Point de test] 50mm/sec FINE    ;
+  31:L P[2] 100mm/sec CNT100 Offset,PR[8]    ;
   32:   ;
-  33:   ;
-  34:C P[2]    
-     :  P[1:Point de test] 23mm/sec FINE    ;
+  33:L P[1:Point de test] 50mm/sec FINE    ;
+  34:   ;
   35:   ;
+  36:C P[2]    
+     :  P[1:Point de test] 23mm/sec FINE    ;
+  37:   ;
 /POS
 P[1:"Point de test"]{
    GP1:

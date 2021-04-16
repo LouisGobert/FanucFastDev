@@ -57,6 +57,16 @@ namespace Compilator.Files
             string[] templateLines = GetFileLine(Const.CS_TEMPLATE_PATH);
 
             string line;
+            int i = 0;
+            while (i < templateLines.Length && !(line = templateLines[i++]).Contains("TEMPLATE_MAIN")) {
+                if (line.Contains("TEMPLATE_CLASS"))
+                    templateLines[i] = templateLines[i].Replace("TEMPLATE_CLASS", csName);
+            }
+
+            if (i < templateLines.Length)
+                templateLines[i] = templateLines[i].Replace("TEMPLATE_MAIN", "Main_" + csName);
+
+            /*
             for (int i = 0; i < templateLines.Length; i++) {
                 line = templateLines[i];
 
@@ -67,7 +77,7 @@ namespace Compilator.Files
 
                     i = templateLines.Length;
                 }
-            }
+            }*/
 
             try 
             {

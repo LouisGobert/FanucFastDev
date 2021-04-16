@@ -8,7 +8,7 @@ namespace Compilator.Interpretor.Maker {
 
         private static char[] FOR_SEPARATOR = { '<', '>', '=', ' ' };
 
-        public static void Make(int iFL, ref string[] fileLine) {
+        public static void Make(int iFL, string[] fileLine) {
 
             // Décorticage de la ligne du for pour obtenir (..;..;..)
             string sentence = fileLine[iFL];
@@ -31,7 +31,13 @@ namespace Compilator.Interpretor.Maker {
 
             // Maintenant on s'ocupe des { }
             int bracketIndex = Utils.ToOpenBracket(iFL, fileLine);
-            fileLine[bracketIndex] = fileLine[bracketIndex].Replace('{', ' ');
+
+            // On vérifie que la ligne n'est pas vide
+            fileLine[bracketIndex] = (fileLine[bracketIndex].Trim().Length == 1) ? "PASS" :
+                                    fileLine[bracketIndex].Replace('{', ' ');
+
+
+
             bracketIndex = Utils.GetIndexEndBlock(bracketIndex, fileLine);
             fileLine[bracketIndex] = "Generation.appendLine(\"  ENDFOR ;\");";
 

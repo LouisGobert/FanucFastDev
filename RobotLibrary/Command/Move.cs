@@ -3,12 +3,12 @@ using RobotLibrary.Global;
 
 namespace RobotLibrary.Command
 {
-    public class Move
+    public static class Move
     {
         private static void GlobalMove(char moveType, Pos target, ushort fast, ushort smooth) {
 
             string formatedOffset = string.Empty;
-            if (target != null) {
+            if (target.PROffset != null) {
                 formatedOffset = " Offset," + target.PROffset.ToString();
                 target.PROffset = null;
             }

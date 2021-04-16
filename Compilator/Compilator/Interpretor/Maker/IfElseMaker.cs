@@ -53,7 +53,7 @@ namespace Compilator.Interpretor.Maker
 
 
             if (line.TrimStart().StartsWith("else"))
-                ElseMake(closeBracket, ref fileLine);
+                ElseMake(closeBracket, fileLine);
             else
                 fileLine[closeBracketTemp] = "Generation.appendLine(\"  ENDIF ;\");";
                 
@@ -64,7 +64,7 @@ namespace Compilator.Interpretor.Maker
         }
 
 
-        private static void ElseMake(int closeBracket, ref string[] fileLine)
+        private static void ElseMake(int closeBracket, string[] fileLine)
         {
 
             int openBracket = (fileLine[closeBracket].Contains('{')) ? 
