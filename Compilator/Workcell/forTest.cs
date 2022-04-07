@@ -12,26 +12,20 @@ using RobotLibrary.Local;
 
 class forTest {
 
-
-
-
     ///////////////////////////////////////////////////////////////
     //     Déclaration des frames et des tools, PR, ...          //
     ///////////////////////////////////////////////////////////////
-
-
 
     public static void Main_forTest()
     {
         // Lister les programmes a créer : 
 
         // EX : 
-        T_EXEMPLE();
+        T_EXEMPLE_GITHUB();
     }
 
 
-
-    static void T_EXEMPLE()
+    static void T_EXEMPLE_GITHUB()
     {
         ProgramInfo.KeepBlankLine = true;
 
@@ -46,11 +40,9 @@ class forTest {
         {
             Print("oui");
         }
-
         if (R[12] > 123) {
             Print("yes");
         }
-
         Pos pTest = new Pos(1, "Point de test");
         Pos pInter = new Pos(2);
         PosReg pAPproche = PR[12];
@@ -71,18 +63,11 @@ class forTest {
          {
             Print("test");
         }
-
         goto test;
         test:
-
-
         Move.Linear(pInter.Offset(PR[8]), 100, 100);
-
         Move.Linear(pTest, 50, 0);
-        
-
         Move.Circular(pInter, pTest, 23, 0);
-
     }
 
 }

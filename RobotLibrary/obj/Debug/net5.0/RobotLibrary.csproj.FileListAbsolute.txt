@@ -1,8 +1,6 @@
 /home/louis/Documents/dev/c#/FanucFastDev/RobotLibrary/bin/Debug/net5.0/RobotLibrary.deps.json
 /home/louis/Documents/dev/c#/FanucFastDev/RobotLibrary/bin/Debug/net5.0/RobotLibrary.dll
-/home/louis/Documents/dev/c#/FanucFastDev/RobotLibrary/bin/Debug/net5.0/ref/RobotLibrary.dll
 /home/louis/Documents/dev/c#/FanucFastDev/RobotLibrary/bin/Debug/net5.0/RobotLibrary.pdb
-/home/louis/Documents/dev/c#/FanucFastDev/RobotLibrary/obj/Debug/net5.0/RobotLibrary.csprojAssemblyReference.cache
 /home/louis/Documents/dev/c#/FanucFastDev/RobotLibrary/obj/Debug/net5.0/RobotLibrary.GeneratedMSBuildEditorConfig.editorconfig
 /home/louis/Documents/dev/c#/FanucFastDev/RobotLibrary/obj/Debug/net5.0/RobotLibrary.AssemblyInfoInputs.cache
 /home/louis/Documents/dev/c#/FanucFastDev/RobotLibrary/obj/Debug/net5.0/RobotLibrary.AssemblyInfo.cs
@@ -22,3 +20,5 @@ C:/Users/Louis/Desktop/dev/git/RobotLibrary/obj/Debug/net5.0/RobotLibrary.csproj
 C:/Users/Louis/Desktop/dev/git/RobotLibrary/obj/Debug/net5.0/RobotLibrary.dll
 C:/Users/Louis/Desktop/dev/git/RobotLibrary/obj/Debug/net5.0/ref/RobotLibrary.dll
 C:/Users/Louis/Desktop/dev/git/RobotLibrary/obj/Debug/net5.0/RobotLibrary.pdb
+/home/louis/Documents/dev/c#/FanucFastDev/RobotLibrary/obj/Debug/net5.0/RobotLibrary.csproj.AssemblyReference.cache
+/home/louis/Documents/dev/c#/FanucFastDev/RobotLibrary/obj/Debug/net5.0/refint/RobotLibrary.dll

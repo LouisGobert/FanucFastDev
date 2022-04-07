@@ -4,8 +4,12 @@ using RobotLibrary;
 using RobotLibrary.Global;
 using RobotLibrary.Global.InOut;
 using RobotLibrary.Utils;
+using static RobotLibrary.Other;
+using static RobotLibrary.Global.Const;
+using RobotLibrary.Command;
+using RobotLibrary.Local;
 
-/*
+
 class FanucFastDev {
 
 #region 
@@ -192,8 +196,6 @@ class FanucFastDev {
 
 }
 
-
-*/
 
 
 
